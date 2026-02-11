@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteques i Modularitat - La Salle Tarragona</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: #1E3A5F;
+            color: #F5A623;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: #1E3A5F;
+            color: #F5A623;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #F5A623;
+            color: #1E3A5F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.active {
+            background: #F5A623;
+            color: #1E3A5F;
+        }
+
+        /* Content sections */
+        .section {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #1E3A5F;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #F5A623;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #1E3A5F;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        /* Project Structure */
+        .project-structure {
+            background: #f8f9fa;
+            border: 2px solid #1E3A5F;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .folder, .file {
+            padding: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+
+        .folder {
+            color: #1E3A5F;
+            font-weight: bold;
+        }
+
+        .file {
+            color: #2196F3;
+            margin-left: 20px;
+        }
+
+        .file:hover {
+            background: #F5A623;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            border-left: 4px solid #F5A623;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        .code-block .keyword {
+            color: #c678dd;
+        }
+
+        .code-block .class-name {
+            color: #e5c07b;
+        }
+
+        .code-block .method {
+            color: #61afef;
+        }
+
+        .code-block .string {
+            color: #98c379;
+        }
+
+        .code-block .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        /* Interactive class viewer */
+        .class-viewer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .class-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .class-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .class-detail {
+            display: none;
+            background: #f8f9fa;
+            border: 2px solid #1E3A5F;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .class-detail.active {
+            display: block;
+            animation: slideDown 0.5s;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 1000px; }
+        }
+
+        /* Comparison table */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-item {
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .comparison-bad {
+            background: #ffebee;
+            border: 2px solid #f44336;
+        }
+
+        .comparison-good {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #F5A623;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1E3A5F;
+            color: #F5A623;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .class-viewer {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .nav {
+                flex-direction: column;
+            }
+        }
+
+        /* Button to show code */
+        .show-code-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .show-code-btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Biblioteques i Modularitat en Java</h1>
+            <p>Programació - DAM · La Salle Tarragona</p>
+        </div>
+
+        <nav class="nav">
+            <button class="nav-btn active" onclick="showSection('intro')">Introducció</button>
+            <button class="nav-btn" onclick="showSection('problema')">El Problema</button>
+            <button class="nav-btn" onclick="showSection('solucio')">La Solució</button>
+            <button class="nav-btn" onclick="showSection('packages')">Packages</button>
+            <button class="nav-btn" onclick="showSection('exemples')">Exemples</button>
+            <button class="nav-btn" onclick="showSection('exercicis')">Exercicis</button>
+        </nav>
+
+        <!-- SECTION: Introducció -->
+        <div id="intro" class="section active">
+            <h2>Què és la Modularitat?</h2>
+            
+            <p style="font-size: 1.2em; margin: 20px 0;">
+                Fins ara has fet programes amb <strong>UNA SOLA CLASSE</strong>... 
+                però els programes reals són com ciutats:
+            </p>
+
+            <div class="info-box">
+                <strong>Edificis:</strong> Molts edificis (<strong>classes</strong>)<br>
+                <strong>Barris:</strong> Organitzats per barris (<strong>packages</strong>)<br>
+                <strong>Connexions:</strong> Connectats entre ells (<strong>imports</strong>)
+            </div>
+
+            <h3>Clica en l'estructura del projecte per explorar:</h3>
+
+            <div class="project-structure">
+                <div class="folder">src/</div>
+                <div class="folder" style="margin-left: 20px;">utilitats/</div>
+                <div class="folder" style="margin-left: 40px;">arrays/</div>
+                <div class="file java" style="margin-left: 60px;" onclick="showClassDetail('CalculsArrayReals')">
+                    CalculsArrayReals.java
+                </div>
+                <div class="folder" style="margin-left: 20px;">programa/</div>
+                <div class="file java" style="margin-left: 40px;" onclick="showClassDetail('RegistreNotes')">
+                    RegistreNotes.java
+                </div>
+                <div class="file java" style="margin-left: 40px;" onclick="showClassDetail('RegistreTemperatures')">
+                    RegistreTemperatures.java
+                </div>
+            </div>
+
+            <div id="detail-CalculsArrayReals" class="class-detail">
+                <h3>CalculsArrayReals.java</h3>
+                <p><strong>Package:</strong> utilitats.arrays</p>
+                <p><strong>Funció:</strong> Repositori de mètodes per operar amb arrays de reals</p>
+                <div class="success-box">
+                    <strong>Mètodes disponibles:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>calcularMaxim(double[] array)</li>
+                        <li>calcularMinim(double[] array)</li>
+                        <li>calcularMitjana(double[] array)</li>
+                    </ul>
+                </div>
+                <button class="show-code-btn" onclick="toggleCode('code-calculs')">Veure Codi</button>
+                <div id="code-calculs" class="code-block hidden"><span class="keyword">package</span> utilitats.arrays;
+
+<span class="keyword">public class</span> <span class="class-name">CalculsArrayReals</span> {
+    
+    <span class="keyword">public</span> <span class="keyword">double</span> <span class="method">calcularMaxim</span>(<span class="keyword">double</span>[] array) {
+        <span class="keyword">double</span> max = array[<span class="string">0</span>];
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
+            <span class="keyword">if</span> (max &lt; array[i]) {
+                max = array[i];
+            }
+        }
+        <span class="keyword">return</span> max;
+    }
+    
+    <span class="comment">// Altres mètodes...</span>
+}</div>
+            </div>
+
+            <div id="detail-RegistreNotes" class="class-detail">
+                <h3>RegistreNotes.java</h3>
+                <p><strong>Package:</strong> programa</p>
+                <p><strong>Funció:</strong> Programa principal que gestiona notes d'estudiants</p>
+                <div class="warning-box">
+                    <strong>Aquesta classe necessita importar:</strong>
+                    <code>import utilitats.arrays.CalculsArrayReals;</code>
+                </div>
+                <button class="show-code-btn" onclick="toggleCode('code-notes')">Veure Codi</button>
+                <div id="code-notes" class="code-block hidden"><span class="keyword">package</span> programa;
+
+<span class="keyword">import</span> utilitats.arrays.CalculsArrayReals;
+
+<span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">inici</span>() {
+        <span class="keyword">double</span>[] notes = {<span class="string">2.0, 5.5, 7.25, 9.5</span>};
+        
+        <span class="comment">// Inicialitzem la classe</span>
+        <span class="class-name">CalculsArrayReals</span> calculador = <span class="keyword">new</span> <span class="class-name">CalculsArrayReals</span>();
+        
+        <span class="comment">// Usem els seus mètodes</span>
+        <span class="keyword">double</span> max = calculador.<span class="method">calcularMaxim</span>(notes);
+        
+        System.out.println(<span class="string">"Màxima: "</span> + max);
+    }
+}</div>
+            </div>
+
+            <div id="detail-RegistreTemperatures" class="class-detail">
+                <h3>RegistreTemperatures.java</h3>
+                <p><strong>Package:</strong> programa</p>
+                <p><strong>Funció:</strong> Programa que gestiona registre de temperatures</p>
+                <div class="success-box">
+                    <strong>Reutilitza la mateixa classe CalculsArrayReals!</strong><br>
+                    No cal copiar codi!
+                </div>
+                <button class="show-code-btn" onclick="toggleCode('code-temps')">Veure Codi</button>
+                <div id="code-temps" class="code-block hidden"><span class="keyword">package</span> programa;
+
+<span class="keyword">import</span> utilitats.arrays.CalculsArrayReals;
+
+<span class="keyword">public class</span> <span class="class-name">RegistreTemperatures</span> {
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">inici</span>() {
+        <span class="keyword">double</span>[] temps = {<span class="string">20.0, 21.5, 19.0, 22.25</span>};
+        
+        <span class="comment">// Reutilitzem la mateixa classe!</span>
+        <span class="class-name">CalculsArrayReals</span> calculador = <span class="keyword">new</span> <span class="class-name">CalculsArrayReals</span>();
+        
+        <span class="keyword">double</span> max = calculador.<span class="method">calcularMaxim</span>(temps);
+        <span class="keyword">double</span> min = calculador.<span class="method">calcularMinim</span>(temps);
+        
+        System.out.println(<span class="string">"Diferència: "</span> + (max - min));
+    }
+}</div>
+            </div>
+        </div>
+
+        <!-- SECTION: El Problema -->
+        <div id="problema" class="section">
+            <h2>El Problema: Programes Monolítics</h2>
+
+            <div class="comparison">
+                <div class="comparison-item comparison-bad">
+                    <h3>Programa Monolític</h3>
+                    <div class="code-block"><span class="keyword">public class</span> <span class="class-name">ProgramaGegant</span> {
+    <span class="comment">// 500 línies de codi...</span>
+    <span class="comment">// 50 mètodes diferents...</span>
+    <span class="comment">// Tot barrejat!</span>
+    <span class="comment">// Impossible de mantenir!</span>
+}</div>
+                    <div class="warning-box">
+                        <strong>Problemes:</strong>
+                        <ul>
+                            <li>Difícil de llegir</li>
+                            <li>No es pot reutilitzar</li>
+                            <li>Errors difícils de trobar</li>
+                            <li>Impossible treballar en equip</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="comparison-item comparison-good">
+                    <h3>Programa Modular</h3>
+                    <div class="code-block"><span class="comment">// CalculsArrays.java</span>
+<span class="keyword">public class</span> <span class="class-name">CalculsArrays</span> {
+    <span class="keyword">public</span> <span class="keyword">double</span> <span class="method">calcularMaxim</span>() { ... }
+    <span class="keyword">public</span> <span class="keyword">double</span> <span class="method">calcularMinim</span>() { ... }
+}
+
+<span class="comment">// RegistreNotes.java</span>
+<span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">inici</span>() {
+        <span class="class-name">CalculsArrays</span> calc = <span class="keyword">new</span> <span class="class-name">CalculsArrays</span>();
+        calc.<span class="method">calcularMaxim</span>(notes);
+    }
+}</div>
+                    <div class="success-box">
+                        <strong>Avantatges:</strong>
+                        <ul>
+                            <li>Fàcil d'entendre</li>
+                            <li>Reutilitzable</li>
+                            <li>Fàcil de mantenir</li>
+                            <li>Treball en equip possible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Exemple Complet: Tot en una classe</h3>
+            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">RegistreNotes</span> programa = <span class="keyword">new</span> <span class="class-name">RegistreNotes</span>();
+        programa.<span class="method">inici</span>();
+    }
+    
+    <span class="keyword">public void</span> <span class="method">inici</span>() {
+        <span class="keyword">double</span>[] notes = {<span class="string">2.0, 5.5, 7.25, 3.0, 9.5</span>};
+        <span class="keyword">double</span> max = <span class="method">calcularMaxim</span>(notes);
+        <span class="keyword">double</span> min = <span class="method">calcularMinim</span>(notes);
+        System.out.println(<span class="string">"Màxima: "</span> + max);
+    }
+    
+    <span class="comment">// ⚠️ Aquests mètodes només funcionen aquí!</span>
+    <span class="keyword">public double</span> <span class="method">calcularMaxim</span>(<span class="keyword">double</span>[] array) {
+        <span class="keyword">double</span> max = array[<span class="string">0</span>];
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
+            <span class="keyword">if</span> (max &lt; array[i]) max = array[i];
+        }
+        <span class="keyword">return</span> max;
+    }
+    
+    <span class="keyword">public double</span> <span class="method">calcularMinim</span>(<span class="keyword">double</span>[] array) {
+        <span class="comment">// ... codi similar ...</span>
+    }
+}</div>
+        </div>
+
+        <!-- SECTION: La Solució -->
+        <div id="solucio" class="section">
+            <h2>La Solució: Modularitat amb Múltiples Classes</h2>
+
+            <h3>Els 2 Passos Clau</h3>
+
+            <ul class="steps">
+                <li>
+                    <strong>INICIALITZAR</strong> la classe (crear l'objecte)
+                    <div class="code-block" style="margin-top: 10px;"><span class="class-name">NomClasse</span> identificador = <span class="keyword">new</span> <span class="class-name">NomClasse</span>();</div>
+                </li>
+                <li>
+                    <strong>INVOCAR</strong> els seus mètodes
+                    <div class="code-block" style="margin-top: 10px;">identificador.<span class="method">nomMetode</span>(parametres);</div>
+                </li>
+            </ul>
+
+            <h3>Estructura amb 2 fitxers</h3>
+
+            <div class="class-viewer">
+                <div class="class-card" onclick="showDetail('detail-calculs-complet')">
+                    <h4>CalculsArrayReals.java</h4>
+                    <p>Classe auxiliar amb mètodes reutilitzables</p>
+                    <p style="margin-top: 10px;">Clica per veure el codi complet</p>
+                </div>
+
+                <div class="class-card" onclick="showDetail('detail-notes-complet')">
+                    <h4>RegistreNotes.java</h4>
+                    <p>Classe principal del programa</p>
+                    <p style="margin-top: 10px;">Clica per veure el codi complet</p>
+                </div>
+            </div>
+
+            <div id="detail-calculs-complet" class="class-detail">
+                <h3>CalculsArrayReals.java - CODI COMPLET</h3>
+                <div class="code-block"><span class="keyword">public class</span> <span class="class-name">CalculsArrayReals</span> {
+    
+    <span class="keyword">public double</span> <span class="method">calcularMaxim</span>(<span class="keyword">double</span>[] array) {
+        <span class="keyword">double</span> max = array[<span class="string">0</span>];
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
+            <span class="keyword">if</span> (max &lt; array[i]) {
+                max = array[i];
+            }
+        }
+        <span class="keyword">return</span> max;
+    }
+    
+    <span class="keyword">public double</span> <span class="method">calcularMinim</span>(<span class="keyword">double</span>[] array) {
+        <span class="keyword">double</span> min = array[<span class="string">0</span>];
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
+            <span class="keyword">if</span> (min &gt; array[i]) {
+                min = array[i];
+            }
+        }
+        <span class="keyword">return</span> min;
+    }
+    
+    <span class="keyword">public double</span> <span class="method">calcularMitjana</span>(<span class="keyword">double</span>[] array) {
+        <span class="keyword">double</span> suma = <span class="string">0</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">0</span>; i &lt; array.length; i++) {
+            suma += array[i];
+        }
+        <span class="keyword">return</span> suma / array.length;
+    }
+}</div>
+                <div class="success-box">
+                    ✨ Aquesta classe es pot reutilitzar en qualsevol programa que necessiti operar amb arrays!
+                </div>
+            </div>
+
+            <div id="detail-notes-complet" class="class-detail">
+                <h3>RegistreNotes.java - CODI COMPLET</h3>
+                <div class="code-block"><span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">RegistreNotes</span> programa = <span class="keyword">new</span> <span class="class-name">RegistreNotes</span>();
+        programa.<span class="method">inici</span>();
+    }
+    
+    <span class="keyword">public void</span> <span class="method">inici</span>() {
+        <span class="keyword">double</span>[] notes = {<span class="string">2.0, 5.5, 7.25, 3.0, 9.5, 8.25</span>};
+        
+        <span class="comment">// Pas 1: INICIALITZEM la classe auxiliar</span>
+        <span class="class-name">CalculsArrayReals</span> calculador = <span class="keyword">new</span> <span class="class-name">CalculsArrayReals</span>();
+        
+        <span class="comment">// Pas 2: INVOQUEM els seus mètodes</span>
+        <span class="keyword">double</span> max = calculador.<span class="method">calcularMaxim</span>(notes);
+        <span class="keyword">double</span> min = calculador.<span class="method">calcularMinim</span>(notes);
+        <span class="keyword">double</span> mitjana = calculador.<span class="method">calcularMitjana</span>(notes);
+        
+        System.out.println(<span class="string">"Nota màxima: "</span> + max);
+        System.out.println(<span class="string">"Nota mínima: "</span> + min);
+        System.out.println(<span class="string">"Mitjana: "</span> + mitjana);
+    }
+}</div>
+                <div class="info-box">
+                    <strong>Important:</strong> Només cal inicialitzar UNA VEGADA! Després pots usar els mètodes tantes vegades com vulguis.
+                </div>
+            </div>
+
+            <div class="success-box" style="margin-top: 30px;">
+                <h3>Avantatges de la Modularitat</h3>
+                <ul>
+                    <li><strong>Reutilització:</strong> Usa CalculsArrayReals en molts programes diferents</li>
+                    <li><strong>Organització:</strong> Cada classe té una funció clara</li>
+                    <li><strong>Manteniment:</strong> Si trobes un error, només cal corregir una classe</li>
+                    <li><strong>Col·laboració:</strong> Diferents programadors poden treballar en diferents classes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION: Packages -->
+        <div id="packages" class="section">
+            <h2>Packages: Organitzant Classes</h2>
+
+            <div class="info-box">
+                <strong>Què és un package?</strong><br>
+                Un package és com una carpeta que agrupa classes relacionades.<br>
+                Serveix per organitzar grans projectes amb moltes classes.
+            </div>
+
+            <h3>Estructura d'un projecte amb packages</h3>
+
+            <div class="project-structure">
+                <div class="folder">src/</div>
+                <div class="folder" style="margin-left: 20px;">utilitats/</div>
+                <div class="folder" style="margin-left: 40px;">arrays/</div>
+                <div class="file java" style="margin-left: 60px;">CalculsArrayReals.java</div>
+                <div class="folder" style="margin-left: 40px;">calcul/</div>
+                <div class="file java" style="margin-left: 60px;">Operacions.java</div>
+                <div class="folder" style="margin-left: 20px;">programa/</div>
+                <div class="file java" style="margin-left: 40px;">RegistreNotes.java</div>
+                <div class="file java" style="margin-left: 40px;">Calculadora.java</div>
+            </div>
+
+            <h3>Com definir un package</h3>
+
+            <div class="warning-box">
+                La declaració del package ha de ser la <strong>PRIMERA línia</strong> del fitxer!
+            </div>
+
+            <div class="code-block"><span class="comment">// Fitxer: utilitats/arrays/CalculsArrayReals.java</span>
+
+<span class="keyword">package</span> utilitats.arrays;  <span class="comment">// ← PRIMERA LÍNIA!</span>
+
+<span class="keyword">public class</span> <span class="class-name">CalculsArrayReals</span> {
+    <span class="comment">// ... el teu codi ...</span>
+}</div>
+
+            <h3>Com IMPORTAR classes d'altres packages</h3>
+
+            <ul class="steps">
+                <li>
+                    <strong>Importació explícita</strong> (RECOMANAT)
+                    <div class="code-block" style="margin-top: 10px;"><span class="keyword">package</span> programa;
+
+<span class="keyword">import</span> utilitats.arrays.CalculsArrayReals;  <span class="comment">// ← Una classe específica</span>
+
+<span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
+    <span class="comment">// Ara pots usar CalculsArrayReals!</span>
+}</div>
+                </li>
+
+                <li>
+                    <strong>Importació amb asterisk</strong> (totes les classes)
+                    <div class="code-block" style="margin-top: 10px;"><span class="keyword">import</span> utilitats.arrays.*;  <span class="comment">// ← TOTES les classes d'aquest package</span></div>
+                </li>
+
+                <li>
+                    <strong>Nom qualificat</strong> (sense import)
+                    <div class="code-block" style="margin-top: 10px;"><span class="comment">// Usar el nom COMPLET cada vegada</span>
+utilitats.arrays.<span class="class-name">CalculsArrayReals</span> calc = 
+    <span class="keyword">new</span> utilitats.arrays.<span class="class-name">CalculsArrayReals</span>();</div>
+                </li>
+            </ul>
+
+            <h3>Convencions de noms per packages</h3>
+
+            <div class="comparison">
+                <div class="comparison-item comparison-good">
+                    <h4>Correcte</h4>
+                    <div class="code-block"><span class="keyword">package</span> utilitats.arrays;
+<span class="keyword">package</span> joc.arena.regles;
+<span class="keyword">package</span> empresa.facturacio;</div>
+                    <p style="margin-top: 10px;">Tot en minúscules<br>Paraules separades per punts</p>
+                </div>
+
+                <div class="comparison-item comparison-bad">
+                    <h4>Incorrecte</h4>
+                    <div class="code-block"><span class="keyword">package</span> Utilitats.Arrays;
+<span class="keyword">package</span> utilitats_arrays;
+<span class="keyword">package</span> UTILITATS;</div>
+                    <p style="margin-top: 10px;">Majúscules<br>Guions baixos<br>Tot en majúscules</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: Exemples -->
+        <div id="exemples" class="section">
+            <h2>Exemple Complet: Calculadora Modular</h2>
+
+            <h3>Objectiu</h3>
+            <p>Crear una calculadora amb operacions bàsiques organitzada amb packages.</p>
+
+            <h3>Estructura del projecte</h3>
+
+            <div class="project-structure">
+                <div class="folder">src/</div>
+                <div class="folder" style="margin-left: 20px;">utilitats/</div>
+                <div class="folder" style="margin-left: 40px;">calcul/</div>
+                <div class="file java" style="margin-left: 60px;" onclick="showDetail('detail-operacions')">
+                    Operacions.java
+                </div>
+                <div class="folder" style="margin-left: 20px;">programa/</div>
+                <div class="file java" style="margin-left: 40px;" onclick="showDetail('detail-calculadora')">
+                    Calculadora.java
+                </div>
+            </div>
+
+            <div id="detail-operacions" class="class-detail">
+                <h3>utilitats/calcul/Operacions.java</h3>
+                <div class="code-block"><span class="keyword">package</span> utilitats.calcul;
+
+<span class="keyword">public class</span> <span class="class-name">Operacions</span> {
+    
+    <span class="keyword">public int</span> <span class="method">sumar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="keyword">public int</span> <span class="method">restar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a - b;
+    }
+    
+    <span class="keyword">public int</span> <span class="method">multiplicar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a * b;
+    }
+    
+    <span class="keyword">public double</span> <span class="method">dividir</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">if</span> (b == <span class="string">0</span>) {
+            System.out.println(<span class="string">"Error: divisió per zero!"</span>);
+            <span class="keyword">return</span> <span class="string">0</span>;
+        }
+        <span class="keyword">return</span> (<span class="keyword">double</span>) a / b;
+    }
+}</div>
+            </div>
+
+            <div id="detail-calculadora" class="class-detail">
+                <h3>programa/Calculadora.java</h3>
+                <div class="code-block"><span class="keyword">package</span> programa;
+
+<span class="keyword">import</span> java.util.Scanner;
+<span class="keyword">import</span> utilitats.calcul.Operacions;  <span class="comment">// ← IMPORTEM!</span>
+
+<span class="keyword">public class</span> <span class="class-name">Calculadora</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">Calculadora</span> programa = <span class="keyword">new</span> <span class="class-name">Calculadora</span>();
+        programa.<span class="method">inici</span>();
+    }
+    
+    <span class="keyword">public void</span> <span class="method">inici</span>() {
+        <span class="class-name">Scanner</span> sc = <span class="keyword">new</span> <span class="class-name">Scanner</span>(System.in);
+        
+        System.out.print(<span class="string">"Primer número: "</span>);
+        <span class="keyword">int</span> num1 = sc.nextInt();
+        
+        System.out.print(<span class="string">"Segon número: "</span>);
+        <span class="keyword">int</span> num2 = sc.nextInt();
+        
+        <span class="comment">// Inicialitzem la classe d'operacions</span>
+        <span class="class-name">Operacions</span> ops = <span class="keyword">new</span> <span class="class-name">Operacions</span>();
+        
+        <span class="comment">// Usem els seus mètodes</span>
+        System.out.println(<span class="string">"Suma: "</span> + ops.<span class="method">sumar</span>(num1, num2));
+        System.out.println(<span class="string">"Resta: "</span> + ops.<span class="method">restar</span>(num1, num2));
+        System.out.println(<span class="string">"Multiplicació: "</span> + ops.<span class="method">multiplicar</span>(num1, num2));
+        System.out.println(<span class="string">"Divisió: "</span> + ops.<span class="method">dividir</span>(num1, num2));
+    }
+}</div>
+            </div>
+
+            <div class="success-box" style="margin-top: 30px;">
+                <h3>Què hem aconseguit?</h3>
+                <ul>
+                    <li>Separació clara entre lògica d'operacions i programa principal</li>
+                    <li>La classe Operacions es pot reutilitzar en altres projectes</li>
+                    <li>Codi més fàcil de mantenir i entendre</li>
+                    <li>Organització professional amb packages</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION: Exercicis -->
+        <div id="exercicis" class="section">
+            <h2>Exercicis per Practicar</h2>
+
+            <div class="warning-box">
+                <strong>Temps estimat:</strong> 45-60 minuts<br>
+                <strong>Entrega:</strong> Codi font complet + captures de pantalla
+            </div>
+
+            <h3>Exercici 1: Gestió de Text</h3>
+            <div class="info-box">
+                <strong>Objectiu:</strong> Crear una aplicació modular per analitzar cadenes de text.
+                
+                <p style="margin-top: 15px;"><strong>Estructura requerida:</strong></p>
+                <ul>
+                    <li><code>utilitats.text.AnalitzadorText</code> - Mètodes d'anàlisi</li>
+                    <li><code>programa.GestorText</code> - Programa principal</li>
+                </ul>
+
+                <p style="margin-top: 15px;"><strong>Mètodes a implementar en AnalitzadorText:</strong></p>
+                <ul>
+                    <li><code>comptarVocals(String text)</code> → retorna int</li>
+                    <li><code>comptarConsonants(String text)</code> → retorna int</li>
+                    <li><code>invertir(String text)</code> → retorna String</li>
+                    <li><code>esPalindrom(String text)</code> → retorna boolean</li>
+                </ul>
+            </div>
+
+            <h3>Exercici 2: Conversió d'Unitats</h3>
+            <div class="info-box">
+                <strong>Objectiu:</strong> Crear un conversor d'unitats (temperatura, distància, pes).
+                
+                <p style="margin-top: 15px;"><strong>Estructura requerida:</strong></p>
+                <ul>
+                    <li><code>utilitats.conversions.Temperatura</code></li>
+                    <li><code>utilitats.conversions.Distancia</code></li>
+                    <li><code>utilitats.conversions.Pes</code></li>
+                    <li><code>programa.Conversor</code> - Amb menú d'opcions</li>
+                </ul>
+
+                <p style="margin-top: 15px;"><strong>Exemple de mètodes:</strong></p>
+                <ul>
+                    <li><code>celsiusAFahrenheit(double celsius)</code></li>
+                    <li><code>kilometresAMilles(double km)</code></li>
+                    <li><code>kilosALliures(double kg)</code></li>
+                </ul>
+            </div>
+
+            <h3>Exercici 3: Gestió de Contactes</h3>
+            <div class="info-box">
+                <strong>Objectiu:</strong> Crear una agenda de contactes amb operacions bàsiques.
+                
+                <p style="margin-top: 15px;"><strong>Estructura requerida:</strong></p>
+                <ul>
+                    <li><code>utilitats.contactes.GestorContactes</code></li>
+                    <li><code>programa.Agenda</code></li>
+                </ul>
+
+                <p style="margin-top: 15px;"><strong>Funcionalitat:</strong></p>
+                <ul>
+                    <li>Afegir contacte (nom, telèfon)</li>
+                    <li>Buscar contacte per nom</li>
+                    <li>Eliminar contacte</li>
+                    <li>Mostrar tots els contactes</li>
+                </ul>
+
+                <p style="margin-top: 15px;"><em>Pista: Usa arrays paral·lels per emmagatzemar noms i telèfons</em></p>
+            </div>
+
+            <h3>Checklist abans d'entregar</h3>
+            <ul class="steps">
+                <li>El projecte està organitzat amb packages correctament</li>
+                <li>Les classes estan en els fitxers i packages correctes</li>
+                <li>Totes les classes tenen la declaració <code>package</code> a la primera línia</li>
+                <li>Els imports són correctes i necessaris</li>
+                <li>El codi compila sense errors</li>
+                <li>El programa funciona correctament</li>
+                <li>El codi està comentat adequadament</li>
+            </ul>
+
+            
+        </div>
+    </div>
+
+    <script>
+        // Show section
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update nav buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Show class detail
+        function showClassDetail(className) {
+            // Hide all details
+            const details = document.querySelectorAll('.class-detail');
+            details.forEach(detail => detail.classList.remove('active'));
+            
+            // Show selected detail
+            const detail = document.getElementById('detail-' + className);
+            if (detail) {
+                detail.classList.add('active');
+                detail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+            }
+        }
+
+        // Show detail (for cards)
+        function showDetail(detailId) {
+            const detail = document.getElementById(detailId);
+            if (detail) {
+                if (detail.classList.contains('active')) {
+                    detail.classList.remove('active');
+                } else {
+                    // Hide all other details
+                    const allDetails = document.querySelectorAll('.class-detail');
+                    allDetails.forEach(d => d.classList.remove('active'));
+                    
+                    // Show this one
+                    detail.classList.add('active');
+                    detail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                }
+            }
+        }
+
+        // Toggle code visibility
+        function toggleCode(codeId) {
+            const code = document.getElementById(codeId);
+            if (code) {
+                code.classList.toggle('hidden');
+                event.target.textContent = code.classList.contains('hidden') ? 
+                    'Veure Codi' : 'Amagar Codi';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Material de Classes i Modularitat carregat!');
+        });
+    </script>
+</body>
+</html>
