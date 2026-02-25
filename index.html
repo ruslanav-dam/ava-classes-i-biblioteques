@@ -3,18 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteques i Modularitat - La Salle Tarragona</title>
+    <title>Programació Orientada a Objectes - La Salle Tarragona</title>
     <style>
-        :root {
-            --ls-blue: #1f2f86;
-            --ls-blue-dark: #16235f;
-            --ls-gold: #d6a62b;
-            --bg-dark: #0b132d;
-            --bg-mid: #13245a;
-            --surface: #ffffff;
-            --text-main: #26334d;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -23,9 +13,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at 12% 0%, #213f8f 0%, var(--bg-mid) 35%, var(--bg-dark) 100%);
-            color: var(--text-main);
+            background: linear-gradient(135deg, #1E3A5F 0%, #2c5282 100%);
+            color: #333;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
@@ -34,78 +25,85 @@
             padding: 20px;
         }
 
-        /* Header */
+        /* Header amb logo */
         .header {
-            background: var(--surface);
-            color: var(--ls-blue);
-            padding: 30px;
-            text-align: center;
+            background: white;
+            padding: 20px 30px;
             border-radius: 15px;
             margin-bottom: 30px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            border-top: 4px solid var(--ls-gold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-content {
+            flex: 1;
+            min-width: 250px;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            color: #1E3A5F;
+            font-size: 2em;
+            margin-bottom: 5px;
         }
 
         .header p {
-            font-size: 1.2em;
-            color: var(--ls-blue-dark);
+            color: #F5A623;
+            font-size: 1.1em;
+            font-weight: 600;
         }
 
-        .brand-logo-wrap {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .brand-logo {
-            width: min(100%, 460px);
+        .logo-container {
+            width: 200px;
             height: auto;
-            display: block;
-            border-radius: 10px;
-            background: #fff;
-            box-shadow: 0 3px 12px rgba(7, 14, 33, 0.12);
+        }
+
+        .logo-container svg {
+            width: 100%;
+            height: auto;
         }
 
         /* Navigation */
         .nav {
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .nav-btn {
-            background: var(--ls-blue);
-            color: #ffffff;
-            border: none;
-            padding: 12px 24px;
+            background: #1E3A5F;
+            color: white;
+            border: 2px solid #1E3A5F;
+            padding: 10px 18px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
+            font-size: 0.95em;
+            font-weight: 600;
             transition: all 0.3s;
+            white-space: nowrap;
         }
 
         .nav-btn:hover {
-            background: var(--ls-gold);
-            color: var(--ls-blue-dark);
+            background: #F5A623;
+            border-color: #F5A623;
+            color: #1E3A5F;
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(245, 166, 35, 0.3);
         }
 
         .nav-btn.active {
-            background: var(--ls-gold);
-            color: var(--ls-blue-dark);
+            background: #F5A623;
+            border-color: #F5A623;
+            color: #1E3A5F;
         }
 
         /* Content sections */
@@ -128,52 +126,65 @@
         }
 
         h2 {
-            color: var(--ls-blue-dark);
+            color: #1E3A5F;
             font-size: 2em;
             margin-bottom: 20px;
-            border-bottom: 3px solid var(--ls-gold);
+            border-bottom: 4px solid #F5A623;
             padding-bottom: 10px;
         }
 
         h3 {
-            color: var(--ls-blue-dark);
+            color: #1E3A5F;
             font-size: 1.5em;
-            margin: 25px 0 15px 0;
+            margin: 30px 0 15px 0;
         }
 
-        /* Project Structure */
-        .project-structure {
-            background: #f8f9fa;
-            border: 2px solid var(--ls-blue-dark);
-            border-radius: 10px;
+        h4 {
+            color: #1E3A5F;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin: 15px 0;
+            font-size: 1.05em;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #1E3A5F;
             padding: 20px;
             margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .folder, .file {
-            padding: 8px;
-            margin: 5px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 5px;
+        .warning-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid #F5A623;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .folder {
-            color: var(--ls-blue-dark);
-            font-weight: bold;
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .file {
-            color: #2196F3;
-            margin-left: 20px;
-        }
-
-        .file:hover {
-            background: var(--ls-gold);
-            color: white;
-            transform: translateX(5px);
+        .error-box {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 5px solid #f44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         /* Code blocks */
@@ -185,107 +196,20 @@
             overflow-x: auto;
             margin: 20px 0;
             font-family: 'Courier New', monospace;
-            position: relative;
-            border-left: 4px solid var(--ls-gold);
+            font-size: 0.95em;
+            border-left: 4px solid #F5A623;
             white-space: pre;
-            line-height: 1.5;
+            line-height: 1.6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        .code-block .keyword {
-            color: #c678dd;
-        }
+        .keyword { color: #c678dd; font-weight: bold; }
+        .class-name { color: #e5c07b; font-weight: bold; }
+        .method { color: #61afef; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
 
-        .code-block .class-name {
-            color: #e5c07b;
-        }
-
-        .code-block .method {
-            color: #61afef;
-        }
-
-        .code-block .string {
-            color: #98c379;
-        }
-
-        .code-block .comment {
-            color: #5c6370;
-            font-style: italic;
-        }
-
-        /* Info boxes */
-        .info-box {
-            background: #e3f2fd;
-            border-left: 5px solid #2196F3;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .warning-box {
-            background: #fff3e0;
-            border-left: 5px solid #ff9800;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .success-box {
-            background: #e8f5e9;
-            border-left: 5px solid #4caf50;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        /* Interactive class viewer */
-        .class-viewer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .class-card {
-            background: linear-gradient(135deg, var(--ls-blue) 0%, var(--ls-blue-dark) 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            border-bottom: 3px solid var(--ls-gold);
-        }
-
-        .class-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .class-card h4 {
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        .class-detail {
-            display: none;
-            background: #f8f9fa;
-            border: 2px solid var(--ls-blue-dark);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .class-detail.active {
-            display: block;
-            animation: slideDown 0.5s;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; max-height: 0; }
-            to { opacity: 1; max-height: 1000px; }
-        }
-
-        /* Comparison table */
+        /* Comparison */
         .comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -296,15 +220,16 @@
         .comparison-item {
             padding: 20px;
             border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .comparison-bad {
-            background: #ffebee;
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
             border: 2px solid #f44336;
         }
 
         .comparison-good {
-            background: #e8f5e9;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border: 2px solid #4caf50;
         }
 
@@ -320,9 +245,10 @@
             padding: 20px;
             margin: 15px 0;
             border-radius: 10px;
-            border-left: 5px solid var(--ls-gold);
+            border-left: 5px solid #F5A623;
             position: relative;
-            padding-left: 60px;
+            padding-left: 70px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .steps li::before {
@@ -331,1061 +257,1165 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            background: var(--ls-blue-dark);
-            color: var(--ls-gold);
-            width: 35px;
-            height: 35px;
+            background: #1E3A5F;
+            color: #F5A623;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.3em;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #1E3A5F 0%, #2c5282 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(245, 166, 35, 0.4);
+            border-color: #F5A623;
+        }
+
+        .card h4 {
+            color: #F5A623;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: white;
+            font-size: 0.95em;
+        }
+
+        /* Analogy box */
+        .analogy {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 3px solid #F5A623;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .analogy-title {
+            color: #1E3A5F;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #1E3A5F;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: #e3f2fd;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-            }
-
-            .header {
-                padding: 20px 16px;
-                margin-bottom: 20px;
-            }
-
-            .class-viewer {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison {
-                grid-template-columns: 1fr;
-            }
-
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .header p {
-                font-size: 1em;
-            }
-
-            .nav {
-                flex-direction: column;
-                padding: 14px;
-            }
-
-            .nav-btn {
-                width: 100%;
-            }
-
-            .section {
-                padding: 22px 16px;
-            }
-
-            .steps li {
-                padding-left: 52px;
-            }
-
-            .code-block {
-                font-size: 0.9rem;
-                padding: 14px;
-            }
-
-            .brand-logo {
-                width: min(100%, 360px);
-            }
+        @media (max-width: 968px) {
+            .container { padding: 15px; }
+            .header { padding: 20px; flex-direction: column; text-align: center; }
+            .header h1 { font-size: 1.5em; }
+            .section { padding: 25px; }
+            h2 { font-size: 1.6em; }
+            .comparison { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: 1fr; }
+            .nav { flex-direction: column; }
+            .nav-btn { width: 100%; }
+            .code-block { font-size: 0.85em; padding: 15px; }
+            .steps li { padding-left: 60px; }
+            .steps li::before { width: 35px; height: 35px; font-size: 1.1em; }
         }
 
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.45em;
-            }
+        strong { color: #1E3A5F; }
 
-            .brand-logo {
-                width: min(100%, 300px);
-            }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+            font-size: 0.95em;
         }
 
-        /* Button to show code */
-        .show-code-btn {
-            background: #4caf50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px 0;
-            font-weight: bold;
-            transition: all 0.3s;
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
         }
 
-        .show-code-btn:hover {
-            background: #45a049;
-            transform: scale(1.05);
-        }
-
-        .hidden {
-            display: none;
+        li {
+            margin: 8px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header amb logo -->
         <div class="header">
-            <div class="brand-logo-wrap">
-                <img class="brand-logo" src="assets/la-salle-tarragona.svg" alt="La Salle Tarragona">
+            <div class="header-content">
+                <h1>Programació Orientada a Objectes en Java</h1>
+                <p>DAM - La Salle Tarragona</p>
             </div>
-            <h1>Biblioteques i Modularitat en Java</h1>
-            <p>Programació - DAM · La Salle Tarragona</p>
+            <div class="logo-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 260">
+                    <defs>
+                        <style>
+                            .blue { fill: #1f2f86; }
+                            .gold-stroke { fill: none; stroke: #d6a62b; stroke-width: 10; }
+                            .line { stroke: #8893b8; stroke-width: 5; }
+                            text { font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif; }
+                        </style>
+                    </defs>
+                    <rect width="100%" height="100%" fill="#ffffff"/>
+                    <text x="44" y="150" class="blue" font-size="112" font-weight="700">La</text>
+                    <text x="356" y="150" class="blue" font-size="112" font-weight="700">Salle</text>
+                    <text x="574" y="208" class="blue" font-size="58" font-weight="600">Tarragona</text>
+                    <path class="gold-stroke" d="M252 26 L271 84 L332 84 L282 120 L300 179 L252 143 L204 179 L222 120 L172 84 L233 84 Z"/>
+                    <line class="line" x1="44" y1="184" x2="190" y2="184"/>
+                    <line class="line" x1="338" y1="184" x2="552" y2="184"/>
+                </svg>
+            </div>
         </div>
 
+        <!-- Navigation -->
         <nav class="nav">
-            <button class="nav-btn active" onclick="showSection('intro')">Introducció</button>
-            <button class="nav-btn" onclick="showSection('problema')">El Problema</button>
-            <button class="nav-btn" onclick="showSection('solucio')">La Solució</button>
+            <button class="nav-btn active" onclick="showSection('intro-poo')">Introducció POO</button>
+            <button class="nav-btn" onclick="showSection('classe-objecte')">Classe vs Objecte</button>
+            <button class="nav-btn" onclick="showSection('modificadors')">Modificadors d'Accés</button>
+            <button class="nav-btn" onclick="showSection('constructors')">Constructors i THIS</button>
             <button class="nav-btn" onclick="showSection('packages')">Packages</button>
-            <button class="nav-btn" onclick="showSection('constructors')">Constructors</button>
             <button class="nav-btn" onclick="showSection('exemples')">Exemples</button>
             <button class="nav-btn" onclick="showSection('exercicis')">Exercicis</button>
         </nav>
 
-        <!-- SECTION: Introducció -->
-        <div id="intro" class="section active">
-            <h2>Què és la Modularitat?</h2>
+        <!-- SECTION 1: Introducció POO -->
+        <div id="intro-poo" class="section active">
+            <h2>Introducció a la Programació Orientada a Objectes</h2>
             
-            <p style="font-size: 1.2em; margin: 20px 0;">
-                Fins ara has fet programes amb <strong>UNA SOLA CLASSE</strong>... 
-                però els programes reals són com ciutats:
-            </p>
+            <h3>Què és la Programació Orientada a Objectes (POO)?</h3>
+            
+            <p>La <strong>Programació Orientada a Objectes</strong> és un paradigma de programació que organitza el codi en <strong>objectes</strong> que contenen tant dades (atributs) com funcionalitat (mètodes).</p>
 
-            <div class="info-box">
-                <strong>Edificis:</strong> Molts edificis (<strong>classes</strong>)<br>
-                <strong>Barris:</strong> Organitzats per barris (<strong>packages</strong>)<br>
-                <strong>Connexions:</strong> Connectats entre ells (<strong>imports</strong>)
+            <div class="analogy">
+                <div class="analogy-title">Analogia del món real</div>
+                <p>Pensa en un <strong>cotxe</strong>:</p>
+                <ul>
+                    <li><strong>Atributs:</strong> color, marca, model, velocitat actual, dipòsit de benzina</li>
+                    <li><strong>Mètodes:</strong> arrencar(), accelerar(), frenar(), girar()</li>
+                </ul>
+                <p>En POO, crearíem una <strong>classe Cotxe</strong> que defineix aquests atributs i mètodes. Després podríem crear molts <strong>objectes cotxe</strong> diferents (el meu cotxe, el teu cotxe, etc.)</p>
             </div>
 
-            <h3>Clica en l'estructura del projecte per explorar:</h3>
+            <h3>Per què POO?</h3>
 
-            <div class="project-structure">
-                <div class="folder">src/</div>
-                <div class="folder" style="margin-left: 20px;">utilitats/</div>
-                <div class="folder" style="margin-left: 40px;">arrays/</div>
-                <div class="file java" style="margin-left: 60px;" onclick="showClassDetail('CalculsArrayReals')">
-                    CalculsArrayReals.java
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Organització</h4>
+                    <p>El codi està estructurat de manera lògica, agrupant dades i funcions relacionades</p>
                 </div>
-                <div class="folder" style="margin-left: 20px;">programa/</div>
-                <div class="file java" style="margin-left: 40px;" onclick="showClassDetail('RegistreNotes')">
-                    RegistreNotes.java
+                <div class="card">
+                    <h4>Reutilització</h4>
+                    <p>Pots crear una classe i usar-la en múltiples projectes</p>
                 </div>
-                <div class="file java" style="margin-left: 40px;" onclick="showClassDetail('RegistreTemperatures')">
-                    RegistreTemperatures.java
+                <div class="card">
+                    <h4>Mantenibilitat</h4>
+                    <p>És més fàcil trobar i corregir errors quan el codi està ben organitzat</p>
+                </div>
+                <div class="card">
+                    <h4>Modelatge Real</h4>
+                    <p>Representa conceptes del món real de manera natural</p>
                 </div>
             </div>
 
-            <div id="detail-CalculsArrayReals" class="class-detail">
-                <h3>CalculsArrayReals.java</h3>
-                <p><strong>Package:</strong> utilitats.arrays</p>
-                <p><strong>Funció:</strong> Repositori de mètodes per operar amb arrays de reals</p>
-                <div class="success-box">
-                    <strong>Mètodes disponibles:</strong>
-                    <ul style="margin-top: 10px;">
-                        <li>calcularMaxim(double[] array)</li>
-                        <li>calcularMinim(double[] array)</li>
-                        <li>calcularMitjana(double[] array)</li>
-                    </ul>
-                </div>
-                <button class="show-code-btn" onclick="toggleCode('code-calculs')">Veure Codi</button>
-                <div id="code-calculs" class="code-block hidden"><span class="keyword">package</span> utilitats.arrays;
-
-<span class="keyword">public class</span> <span class="class-name">CalculsArrayReals</span> {
-    
-    <span class="keyword">public</span> <span class="keyword">double</span> <span class="method">calcularMaxim</span>(<span class="keyword">double</span>[] array) {
-        <span class="keyword">double</span> max = array[<span class="string">0</span>];
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
-            <span class="keyword">if</span> (max &lt; array[i]) {
-                max = array[i];
-            }
-        }
-        <span class="keyword">return</span> max;
-    }
-    
-    <span class="comment">// Altres mètodes...</span>
-}</div>
-            </div>
-
-            <div id="detail-RegistreNotes" class="class-detail">
-                <h3>RegistreNotes.java</h3>
-                <p><strong>Package:</strong> programa</p>
-                <p><strong>Funció:</strong> Programa principal que gestiona notes d'estudiants</p>
-                <div class="warning-box">
-                    <strong>Aquesta classe necessita importar:</strong>
-                    <code>import utilitats.arrays.CalculsArrayReals;</code>
-                </div>
-                <button class="show-code-btn" onclick="toggleCode('code-notes')">Veure Codi</button>
-                <div id="code-notes" class="code-block hidden"><span class="keyword">package</span> programa;
-
-<span class="keyword">import</span> utilitats.arrays.CalculsArrayReals;
-
-<span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">inici</span>() {
-        <span class="keyword">double</span>[] notes = {<span class="string">2.0, 5.5, 7.25, 9.5</span>};
-        
-        <span class="comment">// Inicialitzem la classe</span>
-        <span class="class-name">CalculsArrayReals</span> calculador = <span class="keyword">new</span> <span class="class-name">CalculsArrayReals</span>();
-        
-        <span class="comment">// Usem els seus mètodes</span>
-        <span class="keyword">double</span> max = calculador.<span class="method">calcularMaxim</span>(notes);
-        
-        System.out.println(<span class="string">"Màxima: "</span> + max);
-    }
-}</div>
-            </div>
-
-            <div id="detail-RegistreTemperatures" class="class-detail">
-                <h3>RegistreTemperatures.java</h3>
-                <p><strong>Package:</strong> programa</p>
-                <p><strong>Funció:</strong> Programa que gestiona registre de temperatures</p>
-                <div class="success-box">
-                    <strong>Reutilitza la mateixa classe CalculsArrayReals!</strong><br>
-                    No cal copiar codi!
-                </div>
-                <button class="show-code-btn" onclick="toggleCode('code-temps')">Veure Codi</button>
-                <div id="code-temps" class="code-block hidden"><span class="keyword">package</span> programa;
-
-<span class="keyword">import</span> utilitats.arrays.CalculsArrayReals;
-
-<span class="keyword">public class</span> <span class="class-name">RegistreTemperatures</span> {
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">inici</span>() {
-        <span class="keyword">double</span>[] temps = {<span class="string">20.0, 21.5, 19.0, 22.25</span>};
-        
-        <span class="comment">// Reutilitzem la mateixa classe!</span>
-        <span class="class-name">CalculsArrayReals</span> calculador = <span class="keyword">new</span> <span class="class-name">CalculsArrayReals</span>();
-        
-        <span class="keyword">double</span> max = calculador.<span class="method">calcularMaxim</span>(temps);
-        <span class="keyword">double</span> min = calculador.<span class="method">calcularMinim</span>(temps);
-        
-        System.out.println(<span class="string">"Diferència: "</span> + (max - min));
-    }
-}</div>
-            </div>
-        </div>
-
-        <!-- SECTION: El Problema -->
-        <div id="problema" class="section">
-            <h2>El Problema: Programes Monolítics</h2>
+            <h3>Programació Procedural vs POO</h3>
 
             <div class="comparison">
                 <div class="comparison-item comparison-bad">
-                    <h3>Programa Monolític</h3>
-                    <div class="code-block"><span class="keyword">public class</span> <span class="class-name">ProgramaGegant</span> {
-    <span class="comment">// 500 línies de codi...</span>
-    <span class="comment">// 50 mètodes diferents...</span>
-    <span class="comment">// Tot barrejat!</span>
-    <span class="comment">// Impossible de mantenir!</span>
-}</div>
-                    <div class="warning-box">
-                        <strong>Problemes:</strong>
-                        <ul>
-                            <li>Difícil de llegir</li>
-                            <li>No es pot reutilitzar</li>
-                            <li>Errors difícils de trobar</li>
-                            <li>Impossible treballar en equip</li>
-                        </ul>
-                    </div>
-                </div>
+                    <h4>Programació Procedural</h4>
+                    <div class="code-block"><span class="comment">// Dades i funcions separades</span>
+<span class="keyword">double</span> saldoCompte = <span class="string">1000.0</span>;
+<span class="class-name">String</span> titular = <span class="string">"Anna"</span>;
 
-                <div class="comparison-item comparison-good">
-                    <h3>Programa Modular</h3>
-                    <div class="code-block"><span class="comment">// CalculsArrays.java</span>
-<span class="keyword">public class</span> <span class="class-name">CalculsArrays</span> {
-    <span class="keyword">public</span> <span class="keyword">double</span> <span class="method">calcularMaxim</span>() { ... }
-    <span class="keyword">public</span> <span class="keyword">double</span> <span class="method">calcularMinim</span>() { ... }
+<span class="keyword">void</span> <span class="method">ingressar</span>(<span class="keyword">double</span> quantitat) {
+    saldoCompte += quantitat;
 }
 
-<span class="comment">// RegistreNotes.java</span>
-<span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">inici</span>() {
-        <span class="class-name">CalculsArrays</span> calc = <span class="keyword">new</span> <span class="class-name">CalculsArrays</span>();
-        calc.<span class="method">calcularMaxim</span>(notes);
-    }
+<span class="keyword">void</span> <span class="method">retirar</span>(<span class="keyword">double</span> quantitat) {
+    saldoCompte -= quantitat;
 }</div>
-                    <div class="success-box">
-                        <strong>Avantatges:</strong>
-                        <ul>
-                            <li>Fàcil d'entendre</li>
-                            <li>Reutilitzable</li>
-                            <li>Fàcil de mantenir</li>
-                            <li>Treball en equip possible</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <h3>Exemple Complet: Tot en una classe</h3>
-            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
-    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
-        <span class="class-name">RegistreNotes</span> programa = <span class="keyword">new</span> <span class="class-name">RegistreNotes</span>();
-        programa.<span class="method">inici</span>();
-    }
-    
-    <span class="keyword">public void</span> <span class="method">inici</span>() {
-        <span class="keyword">double</span>[] notes = {<span class="string">2.0, 5.5, 7.25, 3.0, 9.5</span>};
-        <span class="keyword">double</span> max = <span class="method">calcularMaxim</span>(notes);
-        <span class="keyword">double</span> min = <span class="method">calcularMinim</span>(notes);
-        System.out.println(<span class="string">"Màxima: "</span> + max);
-    }
-    
-    <span class="comment">// ⚠️ Aquests mètodes només funcionen aquí!</span>
-    <span class="keyword">public double</span> <span class="method">calcularMaxim</span>(<span class="keyword">double</span>[] array) {
-        <span class="keyword">double</span> max = array[<span class="string">0</span>];
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
-            <span class="keyword">if</span> (max &lt; array[i]) max = array[i];
-        }
-        <span class="keyword">return</span> max;
-    }
-    
-    <span class="keyword">public double</span> <span class="method">calcularMinim</span>(<span class="keyword">double</span>[] array) {
-        <span class="comment">// ... codi similar ...</span>
-    }
-}</div>
-        </div>
-
-        <!-- SECTION: La Solució -->
-        <div id="solucio" class="section">
-            <h2>La Solució: Modularitat amb Múltiples Classes</h2>
-
-            <h3>Els 2 Passos Clau</h3>
-
-            <ul class="steps">
-                <li>
-                    <strong>INICIALITZAR</strong> la classe (crear l'objecte)
-                    <div class="code-block" style="margin-top: 10px;"><span class="class-name">NomClasse</span> identificador = <span class="keyword">new</span> <span class="class-name">NomClasse</span>();</div>
-                </li>
-                <li>
-                    <strong>INVOCAR</strong> els seus mètodes
-                    <div class="code-block" style="margin-top: 10px;">identificador.<span class="method">nomMetode</span>(parametres);</div>
-                </li>
-            </ul>
-
-            <h3>Estructura amb 2 fitxers</h3>
-
-            <div class="class-viewer">
-                <div class="class-card" onclick="showDetail('detail-calculs-complet')">
-                    <h4>CalculsArrayReals.java</h4>
-                    <p>Classe auxiliar amb mètodes reutilitzables</p>
-                    <p style="margin-top: 10px;">Clica per veure el codi complet</p>
+                    <p>Les dades i funcions estan separades i desorganitzades</p>
                 </div>
 
-                <div class="class-card" onclick="showDetail('detail-notes-complet')">
-                    <h4>RegistreNotes.java</h4>
-                    <p>Classe principal del programa</p>
-                    <p style="margin-top: 10px;">Clica per veure el codi complet</p>
-                </div>
-            </div>
-
-            <div id="detail-calculs-complet" class="class-detail">
-                <h3>CalculsArrayReals.java - CODI COMPLET</h3>
-                <div class="code-block"><span class="keyword">public class</span> <span class="class-name">CalculsArrayReals</span> {
-    
-    <span class="keyword">public double</span> <span class="method">calcularMaxim</span>(<span class="keyword">double</span>[] array) {
-        <span class="keyword">double</span> max = array[<span class="string">0</span>];
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
-            <span class="keyword">if</span> (max &lt; array[i]) {
-                max = array[i];
-            }
-        }
-        <span class="keyword">return</span> max;
-    }
-    
-    <span class="keyword">public double</span> <span class="method">calcularMinim</span>(<span class="keyword">double</span>[] array) {
-        <span class="keyword">double</span> min = array[<span class="string">0</span>];
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">1</span>; i &lt; array.length; i++) {
-            <span class="keyword">if</span> (min &gt; array[i]) {
-                min = array[i];
-            }
-        }
-        <span class="keyword">return</span> min;
-    }
-    
-    <span class="keyword">public double</span> <span class="method">calcularMitjana</span>(<span class="keyword">double</span>[] array) {
-        <span class="keyword">double</span> suma = <span class="string">0</span>;
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">0</span>; i &lt; array.length; i++) {
-            suma += array[i];
-        }
-        <span class="keyword">return</span> suma / array.length;
-    }
-}</div>
-                <div class="success-box">
-                    ✨ Aquesta classe es pot reutilitzar en qualsevol programa que necessiti operar amb arrays!
-                </div>
-            </div>
-
-            <div id="detail-notes-complet" class="class-detail">
-                <h3>RegistreNotes.java - CODI COMPLET</h3>
-                <div class="code-block"><span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
-    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
-        <span class="class-name">RegistreNotes</span> programa = <span class="keyword">new</span> <span class="class-name">RegistreNotes</span>();
-        programa.<span class="method">inici</span>();
-    }
-    
-    <span class="keyword">public void</span> <span class="method">inici</span>() {
-        <span class="keyword">double</span>[] notes = {<span class="string">2.0, 5.5, 7.25, 3.0, 9.5, 8.25</span>};
-        
-        <span class="comment">// Pas 1: INICIALITZEM la classe auxiliar</span>
-        <span class="class-name">CalculsArrayReals</span> calculador = <span class="keyword">new</span> <span class="class-name">CalculsArrayReals</span>();
-        
-        <span class="comment">// Pas 2: INVOQUEM els seus mètodes</span>
-        <span class="keyword">double</span> max = calculador.<span class="method">calcularMaxim</span>(notes);
-        <span class="keyword">double</span> min = calculador.<span class="method">calcularMinim</span>(notes);
-        <span class="keyword">double</span> mitjana = calculador.<span class="method">calcularMitjana</span>(notes);
-        
-        System.out.println(<span class="string">"Nota màxima: "</span> + max);
-        System.out.println(<span class="string">"Nota mínima: "</span> + min);
-        System.out.println(<span class="string">"Mitjana: "</span> + mitjana);
-    }
-}</div>
-                <div class="info-box">
-                    <strong>Important:</strong> Només cal inicialitzar UNA VEGADA! Després pots usar els mètodes tantes vegades com vulguis.
-                </div>
-            </div>
-
-            <div class="success-box" style="margin-top: 30px;">
-                <h3>Avantatges de la Modularitat</h3>
-                <ul>
-                    <li><strong>Reutilització:</strong> Usa CalculsArrayReals en molts programes diferents</li>
-                    <li><strong>Organització:</strong> Cada classe té una funció clara</li>
-                    <li><strong>Manteniment:</strong> Si trobes un error, només cal corregir una classe</li>
-                    <li><strong>Col·laboració:</strong> Diferents programadors poden treballar en diferents classes</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- SECTION: Packages -->
-        <div id="packages" class="section">
-            <h2>Packages: Organitzant Classes</h2>
-
-            <div class="info-box">
-                <strong>Què és un package?</strong><br>
-                Un package és com una carpeta que agrupa classes relacionades.<br>
-                Serveix per organitzar grans projectes amb moltes classes.
-            </div>
-
-            <h3>Estructura d'un projecte amb packages</h3>
-
-            <div class="project-structure">
-                <div class="folder">src/</div>
-                <div class="folder" style="margin-left: 20px;">utilitats/</div>
-                <div class="folder" style="margin-left: 40px;">arrays/</div>
-                <div class="file java" style="margin-left: 60px;">CalculsArrayReals.java</div>
-                <div class="folder" style="margin-left: 40px;">calcul/</div>
-                <div class="file java" style="margin-left: 60px;">Operacions.java</div>
-                <div class="folder" style="margin-left: 20px;">programa/</div>
-                <div class="file java" style="margin-left: 40px;">RegistreNotes.java</div>
-                <div class="file java" style="margin-left: 40px;">Calculadora.java</div>
-            </div>
-
-            <h3>Com definir un package</h3>
-
-            <div class="warning-box">
-                La declaració del package ha de ser la <strong>PRIMERA línia</strong> del fitxer!
-            </div>
-
-            <div class="code-block"><span class="comment">// Fitxer: utilitats/arrays/CalculsArrayReals.java</span>
-
-<span class="keyword">package</span> utilitats.arrays;  <span class="comment">// ← PRIMERA LÍNIA!</span>
-
-<span class="keyword">public class</span> <span class="class-name">CalculsArrayReals</span> {
-    <span class="comment">// ... el teu codi ...</span>
-}</div>
-
-            <h3>Com IMPORTAR classes d'altres packages</h3>
-
-            <ul class="steps">
-                <li>
-                    <strong>Importació explícita</strong> (RECOMANAT)
-                    <div class="code-block" style="margin-top: 10px;"><span class="keyword">package</span> programa;
-
-<span class="keyword">import</span> utilitats.arrays.CalculsArrayReals;  <span class="comment">// ← Una classe específica</span>
-
-<span class="keyword">public class</span> <span class="class-name">RegistreNotes</span> {
-    <span class="comment">// Ara pots usar CalculsArrayReals!</span>
-}</div>
-                </li>
-
-                <li>
-                    <strong>Importació amb asterisk</strong> (totes les classes)
-                    <div class="code-block" style="margin-top: 10px;"><span class="keyword">import</span> utilitats.arrays.*;  <span class="comment">// ← TOTES les classes d'aquest package</span></div>
-                </li>
-
-                <li>
-                    <strong>Nom qualificat</strong> (sense import)
-                    <div class="code-block" style="margin-top: 10px;"><span class="comment">// Usar el nom COMPLET cada vegada</span>
-utilitats.arrays.<span class="class-name">CalculsArrayReals</span> calc = 
-    <span class="keyword">new</span> utilitats.arrays.<span class="class-name">CalculsArrayReals</span>();</div>
-                </li>
-            </ul>
-
-            <h3>Convencions de noms per packages</h3>
-
-            <div class="comparison">
                 <div class="comparison-item comparison-good">
-                    <h4>Correcte</h4>
-                    <div class="code-block"><span class="keyword">package</span> utilitats.arrays;
-<span class="keyword">package</span> joc.arena.regles;
-<span class="keyword">package</span> empresa.facturacio;</div>
-                    <p style="margin-top: 10px;">Tot en minúscules<br>Paraules separades per punts</p>
-                </div>
-
-                <div class="comparison-item comparison-bad">
-                    <h4>Incorrecte</h4>
-                    <div class="code-block"><span class="keyword">package</span> Utilitats.Arrays;
-<span class="keyword">package</span> utilitats_arrays;
-<span class="keyword">package</span> UTILITATS;</div>
-                    <p style="margin-top: 10px;">Majúscules<br>Guions baixos<br>Tot en majúscules</p>
+                    <h4>Programació Orientada a Objectes</h4>
+                    <div class="code-block"><span class="comment">// Tot agrupat en una classe</span>
+<span class="keyword">public class</span> <span class="class-name">CompteBancari</span> {
+    <span class="keyword">private double</span> saldo;
+    <span class="keyword">private</span> <span class="class-name">String</span> titular;
+    
+    <span class="keyword">public void</span> <span class="method">ingressar</span>(<span class="keyword">double</span> quantitat) {
+        saldo += quantitat;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">retirar</span>(<span class="keyword">double</span> quantitat) {
+        saldo -= quantitat;
+    }
+}</div>
+                    <p>Dades i comportament encapsulats junts</p>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION: Constructors -->
-        <div id="constructors" class="section">
-            <h2>Constructors: Inicialitzant Objectes</h2>
-
-            <div class="info-box">
-                <strong>Què és un constructor?</strong><br>
-                Un constructor és un mètode especial que s'executa automàticament quan crees un objecte amb <code>new</code>.<br>
-                Serveix per <strong>inicialitzar l'estat</strong> de l'objecte amb valors inicials.
+        <!-- SECTION 2: Classe vs Objecte -->
+        <div id="classe-objecte" class="section">
+            <h2>Classe vs Objecte</h2>
+            
+            <div class="analogy">
+                <div class="analogy-title">L'analogia de les galetes</div>
+                <p><strong>Imagina que ets el propietari d'una fàbrica de galetes:</strong></p>
+                <ul>
+                    <li><strong>La CLASSE</strong> és el motlle de les galetes: defineix la forma, la mida, els ingredients</li>
+                    <li><strong>Els OBJECTES</strong> són les galetes reals que fabriques amb el motlle</li>
+                </ul>
+                <p>Amb un sol motlle (classe) pots fer milers de galetes (objectes). Cada galeta té les mateixes característiques (forma, ingredients) però són galetes individuals i diferents.</p>
             </div>
 
-            <h3>Característiques dels Constructors</h3>
-
-            <div class="success-box">
+            <h3>Què és una Classe?</h3>
+            
+            <div class="info-box">
+                <strong>Una classe en Java és:</strong>
                 <ul>
-                    <li><strong>Mateix nom que la classe:</strong> Si la classe es diu <code>Persona</code>, el constructor es diu <code>Persona</code></li>
-                    <li><strong>NO té tipus de retorn:</strong> Ni <code>void</code>, ni <code>int</code>, ni res</li>
-                    <li><strong>S'executa automàticament:</strong> Quan fas <code>new NomClasse()</code></li>
-                    <li><strong>Pot rebre paràmetres:</strong> Per inicialitzar l'objecte amb valors específics</li>
+                    <li>Un <strong>plànol o plantilla</strong> que defineix les característiques i comportaments</li>
+                    <li>Conté <strong>atributs</strong> (variables que representen l'estat)</li>
+                    <li>Conté <strong>mètodes</strong> (funcions que defineixen el comportament)</li>
+                    <li>NO ocupa memòria fins que crees objectes</li>
                 </ul>
             </div>
 
-            <h3>Constructor per Defecte (sense paràmetres)</h3>
+            <h3>Què és un Objecte?</h3>
+            
+            <div class="info-box">
+                <strong>Un objecte en Java és:</strong>
+                <ul>
+                    <li>Una <strong>instància concreta</strong> d'una classe</li>
+                    <li>Ocupa <strong>memòria real</strong> quan es crea amb <code>new</code></li>
+                    <li>Té els seus <strong>propis valors</strong> per als atributs</li>
+                    <li>Pot cridar els <strong>mètodes</strong> definits a la classe</li>
+                </ul>
+            </div>
 
-            <div class="comparison">
-                <div class="comparison-item comparison-bad">
-                    <h4>Sense Constructor</h4>
-                    <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Persona</span> {
+            <h3>Diferències Clau</h3>
+
+            <table>
+                <tr>
+                    <th>Aspecte</th>
+                    <th>Classe</th>
+                    <th>Objecte</th>
+                </tr>
+                <tr>
+                    <td><strong>Què és?</strong></td>
+                    <td>Plantilla / Plànol / Motlle</td>
+                    <td>Instància real creada a partir de la classe</td>
+                </tr>
+                <tr>
+                    <td><strong>Memòria</strong></td>
+                    <td>No ocupa memòria</td>
+                    <td>Ocupa memòria quan es crea</td>
+                </tr>
+                <tr>
+                    <td><strong>Quantitat</strong></td>
+                    <td>Una sola definició</td>
+                    <td>Molts objectes de la mateixa classe</td>
+                </tr>
+                <tr>
+                    <td><strong>Paraula clau</strong></td>
+                    <td><code>class</code></td>
+                    <td><code>new</code></td>
+                </tr>
+            </table>
+
+            <div class="code-block"><span class="comment">// UNA classe Persona</span>
+<span class="keyword">public class</span> <span class="class-name">Persona</span> {
     <span class="keyword">private</span> <span class="class-name">String</span> nom;
     <span class="keyword">private</span> <span class="keyword">int</span> edat;
     
-    <span class="comment">// Sense constructor explícit</span>
-    <span class="comment">// Java crea un constructor buit automàticament</span>
+    <span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom, <span class="keyword">int</span> edat) {
+        <span class="keyword">this</span>.nom = nom;
+        <span class="keyword">this</span>.edat = edat;
+    }
+}
+
+<span class="comment">// MOLTS objectes Persona</span>
+<span class="class-name">Persona</span> anna = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Anna"</span>, <span class="string">25</span>);
+<span class="class-name">Persona</span> joan = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Joan"</span>, <span class="string">30</span>);
+<span class="class-name">Persona</span> maria = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Maria"</span>, <span class="string">22</span>);
+
+<span class="comment">// Cada objecte té els seus propis valors</span></div>
+        </div>
+
+        <!-- SECTION 3: Modificadors d'Accés -->
+        <div id="modificadors" class="section">
+            <h2>Modificadors d'Accés i Encapsulació</h2>
+            
+            <h3>Què són els Modificadors d'Accés?</h3>
+            
+            <p>Els modificadors d'accés són paraules clau que controlen <strong>qui pot accedir</strong> als atributs i mètodes d'una classe.</p>
+
+            <div class="analogy">
+                <div class="analogy-title">Analogia de la casa</div>
+                <p>Pensa en una casa amb diferents habitacions:</p>
+                <ul>
+                    <li><strong>public:</strong> Com el jardí públic - tothom pot entrar</li>
+                    <li><strong>private:</strong> Com el teu dormitori - només tu hi tens accés</li>
+                </ul>
+            </div>
+
+            <h3>Els dos modificadors principals</h3>
+
+            <table>
+                <tr>
+                    <th>Modificador</th>
+                    <th>Visible des de...</th>
+                    <th>Quan usar-lo</th>
+                </tr>
+                <tr>
+                    <td><code>public</code></td>
+                    <td>Qualsevol lloc</td>
+                    <td>Mètodes que vols que altres classes usin</td>
+                </tr>
+                <tr>
+                    <td><code>private</code></td>
+                    <td>Només dins la pròpia classe</td>
+                    <td>Atributs que vols protegir (SEMPRE!)</td>
+                </tr>
+            </table>
+
+            <h3>Getters i Setters</h3>
+
+            <p>Com que els atributs són privats, necessitem <strong>mètodes públics</strong> per accedir-hi i modificar-los de manera controlada.</p>
+
+            <div class="info-box">
+                <strong>Nomenclatura estàndard:</strong>
+                <ul>
+                    <li><strong>Getter:</strong> <code>get + NomAtribut()</code> - per obtenir el valor</li>
+                    <li><strong>Setter:</strong> <code>set + NomAtribut(valor)</code> - per establir el valor</li>
+                </ul>
+            </div>
+
+            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Persona</span> {
+    <span class="comment">// Atributs PRIVATS</span>
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;
+    <span class="keyword">private</span> <span class="keyword">int</span> edat;
+    
+    <span class="comment">// GETTER per nom</span>
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getNom</span>() {
+        <span class="keyword">return</span> nom;
+    }
+    
+    <span class="comment">// SETTER per nom amb validació</span>
+    <span class="keyword">public void</span> <span class="method">setNom</span>(<span class="class-name">String</span> nom) {
+        <span class="keyword">if</span> (nom != <span class="keyword">null</span> && !nom.<span class="method">isEmpty</span>()) {
+            <span class="keyword">this</span>.nom = nom;
+        }
+    }
 }</div>
-                    <p style="margin-top: 10px;">Java crea un constructor buit automàticament, però no inicialitza res</p>
+
+            <div class="success-box">
+                <h4>Regla d'or de l'encapsulació:</h4>
+                <ul>
+                    <li>Atributs → SEMPRE <code>private</code></li>
+                    <li>Mètodes d'ús públic → <code>public</code></li>
+                    <li>Usar getters/setters per accedir als atributs</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Constructors i THIS (AMPLIADA) -->
+        <div id="constructors" class="section">
+            <h2>Constructors i la Paraula Clau THIS</h2>
+            
+            <h3>Què és un Constructor?</h3>
+            
+            <div class="info-box">
+                <p>Un <strong>constructor</strong> és un mètode especial que s'executa automàticament quan crees un objecte amb <code>new</code>.</p>
+                <p><strong>La seva funció:</strong> Inicialitzar l'estat de l'objecte amb valors inicials.</p>
+            </div>
+
+            <h3>Per què necessitem Constructors?</h3>
+
+            <div class="comparison">
+                <div class="comparison-item comparison-bad">
+                    <h4>SENSE Constructor (Malament)</h4>
+                    <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Persona</span> {
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;
+    <span class="keyword">private</span> <span class="keyword">int</span> edat;
+}
+
+<span class="comment">// Crear objecte sense inicialitzar</span>
+<span class="class-name">Persona</span> p = <span class="keyword">new</span> <span class="class-name">Persona</span>();
+<span class="comment">// nom = null, edat = 0</span>
+<span class="comment">// Atributs sense valors vàlids!</span></div>
+                    <p>L'objecte es crea amb valors per defecte (null, 0) que poden causar errors</p>
                 </div>
 
                 <div class="comparison-item comparison-good">
-                    <h4>Amb Constructor</h4>
+                    <h4>AMB Constructor (Correcte)</h4>
                     <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Persona</span> {
     <span class="keyword">private</span> <span class="class-name">String</span> nom;
     <span class="keyword">private</span> <span class="keyword">int</span> edat;
     
     <span class="comment">// Constructor que inicialitza</span>
-    <span class="keyword">public</span> <span class="method">Persona</span>() {
-        nom = <span class="string">"Desconegut"</span>;
-        edat = <span class="string">0</span>;
-    }
-}</div>
-                    <p style="margin-top: 10px;">El constructor estableix valors inicials per defecte</p>
-                </div>
-            </div>
-
-            <h3>Constructor amb Paràmetres</h3>
-
-            <p style="margin: 20px 0;">El constructor més útil és el que rep paràmetres per inicialitzar l'objecte amb valors específics:</p>
-
-            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Persona</span> {
-    <span class="keyword">private</span> <span class="class-name">String</span> nom;
-    <span class="keyword">private</span> <span class="keyword">int</span> edat;
-    
-    <span class="comment">// Constructor amb paràmetres</span>
     <span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom, <span class="keyword">int</span> edat) {
         <span class="keyword">this</span>.nom = nom;
         <span class="keyword">this</span>.edat = edat;
     }
-    
-    <span class="keyword">public void</span> <span class="method">mostrarInfo</span>() {
-        System.out.println(<span class="string">"Nom: "</span> + nom + <span class="string">", Edat: "</span> + edat);
-    }
-}</div>
+}
+
+<span class="comment">// Crear objecte AMB valors</span>
+<span class="class-name">Persona</span> p = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Anna"</span>, <span class="string">25</span>);
+<span class="comment">// nom = "Anna", edat = 25</span>
+<span class="comment">// Objecte correctament inicialitzat!</span></div>
+                    <p>L'objecte es crea amb valors vàlids des del principi</p>
+                </div>
+            </div>
+
+            <h3>Característiques dels Constructors</h3>
+
+            <ul class="steps">
+                <li>
+                    <strong>Mateix nom que la classe</strong><br>
+                    Si la classe es diu <code>Persona</code>, el constructor es diu <code>Persona</code> (exactament igual)
+                </li>
+                <li>
+                    <strong>NO té tipus de retorn</strong><br>
+                    Ni <code>void</code>, ni <code>int</code>, ni res. Simplement no en té.
+                </li>
+                <li>
+                    <strong>S'executa automàticament</strong><br>
+                    Quan fas <code>new NomClasse()</code>, el constructor s'executa sol
+                </li>
+                <li>
+                    <strong>Pot rebre paràmetres</strong><br>
+                    Per inicialitzar l'objecte amb valors específics que tu decideixes
+                </li>
+            </ul>
+
+            <h3>La Paraula Clau THIS - Explicació Profunda</h3>
 
             <div class="warning-box">
-                <strong>Importància de 'this':</strong><br>
-                <code>this.nom = nom;</code> significa: "l'atribut nom d'aquest objecte = el paràmetre nom"<br>
-                <code>this</code> fa referència a l'objecte actual i evita confusions entre atributs i paràmetres amb el mateix nom.
+                <h4>Què és THIS?</h4>
+                <p><code>this</code> és una referència a <strong>l'objecte actual</strong>, l'objecte que s'està creant en aquest moment.</p>
+                <p>Serveix per distingir entre els <strong>atributs de la classe</strong> i els <strong>paràmetres del constructor</strong> quan tenen el mateix nom.</p>
             </div>
 
-            <h3>Usar el Constructor</h3>
+            <h3>Per què necessitem THIS?</h3>
 
-            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">ProgramaPrincipal</span> {
-    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
-        <span class="comment">// Crear objecte passant valors al constructor</span>
-        <span class="class-name">Persona</span> p1 = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Anna"</span>, <span class="string">25</span>);
-        <span class="class-name">Persona</span> p2 = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Joan"</span>, <span class="string">30</span>);
-        
-        p1.<span class="method">mostrarInfo</span>();  <span class="comment">// Nom: Anna, Edat: 25</span>
-        p2.<span class="method">mostrarInfo</span>();  <span class="comment">// Nom: Joan, Edat: 30</span>
-    }
-}</div>
-
-            <h3>Múltiples Constructors (Sobrecàrrega)</h3>
-
-            <p style="margin: 20px 0;">Pots tenir diversos constructors amb diferents paràmetres:</p>
+            <p>Imagina aquesta situació:</p>
 
             <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Persona</span> {
-    <span class="keyword">private</span> <span class="class-name">String</span> nom;
-    <span class="keyword">private</span> <span class="keyword">int</span> edat;
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;  <span class="comment">← Atribut de la classe</span>
     
-    <span class="comment">// Constructor 1: sense paràmetres</span>
-    <span class="keyword">public</span> <span class="method">Persona</span>() {
-        nom = <span class="string">"Desconegut"</span>;
-        edat = <span class="string">0</span>;
-    }
-    
-    <span class="comment">// Constructor 2: només amb nom</span>
-    <span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom) {
-        <span class="keyword">this</span>.nom = nom;
-        edat = <span class="string">0</span>;
-    }
-    
-    <span class="comment">// Constructor 3: amb nom i edat</span>
-    <span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom, <span class="keyword">int</span> edat) {
-        <span class="keyword">this</span>.nom = nom;
-        <span class="keyword">this</span>.edat = edat;
+    <span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom) {  <span class="comment">← Paràmetre del constructor</span>
+        <span class="comment">// Aquí hi ha DOS "nom" diferents!</span>
+        <span class="comment">// 1. this.nom = l'atribut de la classe</span>
+        <span class="comment">// 2. nom = el paràmetre del constructor</span>
     }
 }</div>
-
-            <div class="info-box">
-                <strong>Ús:</strong><br>
-                <code>Persona p1 = new Persona();</code> → Usa el constructor 1<br>
-                <code>Persona p2 = new Persona("Maria");</code> → Usa el constructor 2<br>
-                <code>Persona p3 = new Persona("Pere", 40);</code> → Usa el constructor 3
-            </div>
-
-            <h3>Exemple Complet: Classe Rectangle</h3>
-
-            <div class="class-viewer">
-                <div class="class-card" onclick="showDetail('detail-rectangle')">
-                    <h4>Rectangle.java</h4>
-                    <p>Classe amb constructors i mètodes</p>
-                    <p style="margin-top: 10px;">Clica per veure el codi complet</p>
-                </div>
-
-                <div class="class-card" onclick="showDetail('detail-programa-rectangle')">
-                    <h4>ProgramaRectangle.java</h4>
-                    <p>Programa que usa la classe Rectangle</p>
-                    <p style="margin-top: 10px;">Clica per veure el codi complet</p>
-                </div>
-            </div>
-
-            <div id="detail-rectangle" class="class-detail">
-                <h3>Rectangle.java - Classe completa</h3>
-                <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Rectangle</span> {
-    <span class="comment">// Atributs privats</span>
-    <span class="keyword">private</span> <span class="keyword">double</span> amplada;
-    <span class="keyword">private</span> <span class="keyword">double</span> altura;
-    
-    <span class="comment">// Constructor sense paràmetres: rectangle quadrat 1x1</span>
-    <span class="keyword">public</span> <span class="method">Rectangle</span>() {
-        amplada = <span class="string">1.0</span>;
-        altura = <span class="string">1.0</span>;
-    }
-    
-    <span class="comment">// Constructor amb paràmetres</span>
-    <span class="keyword">public</span> <span class="method">Rectangle</span>(<span class="keyword">double</span> amplada, <span class="keyword">double</span> altura) {
-        <span class="keyword">this</span>.amplada = amplada;
-        <span class="keyword">this</span>.altura = altura;
-    }
-    
-    <span class="comment">// Mètodes públics</span>
-    <span class="keyword">public double</span> <span class="method">calcularArea</span>() {
-        <span class="keyword">return</span> amplada * altura;
-    }
-    
-    <span class="keyword">public double</span> <span class="method">calcularPerimetre</span>() {
-        <span class="keyword">return</span> <span class="string">2</span> * (amplada + altura);
-    }
-    
-    <span class="keyword">public void</span> <span class="method">mostrarInfo</span>() {
-        System.out.println(<span class="string">"Rectangle "</span> + amplada + <span class="string">"x"</span> + altura);
-        System.out.println(<span class="string">"Àrea: "</span> + <span class="method">calcularArea</span>());
-        System.out.println(<span class="string">"Perímetre: "</span> + <span class="method">calcularPerimetre</span>());
-    }
-}</div>
-            </div>
-
-            <div id="detail-programa-rectangle" class="class-detail">
-                <h3>ProgramaRectangle.java - Programa d'exemple</h3>
-                <div class="code-block"><span class="keyword">public class</span> <span class="class-name">ProgramaRectangle</span> {
-    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
-        <span class="comment">// Usar constructor sense paràmetres</span>
-        <span class="class-name">Rectangle</span> r1 = <span class="keyword">new</span> <span class="class-name">Rectangle</span>();
-        r1.<span class="method">mostrarInfo</span>();
-        
-        System.out.println();
-        
-        <span class="comment">// Usar constructor amb paràmetres</span>
-        <span class="class-name">Rectangle</span> r2 = <span class="keyword">new</span> <span class="class-name">Rectangle</span>(<span class="string">5.0</span>, <span class="string">3.0</span>);
-        r2.<span class="method">mostrarInfo</span>();
-        
-        System.out.println();
-        
-        <span class="comment">// Crear diversos rectangles</span>
-        <span class="class-name">Rectangle</span> r3 = <span class="keyword">new</span> <span class="class-name">Rectangle</span>(<span class="string">10.0</span>, <span class="string">2.5</span>);
-        r3.<span class="method">mostrarInfo</span>();
-    }
-}</div>
-                <div class="success-box" style="margin-top: 15px;">
-                    <strong>Sortida del programa:</strong>
-                    <pre style="margin-top: 10px; background: white; padding: 10px; border-radius: 5px; color: #333;">
-Rectangle 1.0x1.0
-Àrea: 1.0
-Perímetre: 4.0
-
-Rectangle 5.0x3.0
-Àrea: 15.0
-Perímetre: 16.0
-
-Rectangle 10.0x2.5
-Àrea: 25.0
-Perímetre: 25.0</pre>
-                </div>
-            </div>
-
-            <h3>Errors Comuns amb Constructors</h3>
 
             <div class="comparison">
                 <div class="comparison-item comparison-bad">
-                    <h4>Incorrecte</h4>
-                    <div class="code-block"><span class="comment">// ERROR 1: Tipus de retorn</span>
-<span class="keyword">public void</span> <span class="method">Persona</span>() {
-    <span class="comment">// Això NO és un constructor!</span>
+                    <h4>Sense THIS - ERROR!</h4>
+                    <div class="code-block"><span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom, <span class="keyword">int</span> edat) {
+    nom = nom;      <span class="comment">// ❌ Assigna el paràmetre a si mateix!</span>
+    edat = edat;    <span class="comment">// ❌ No modifica l'atribut!</span>
 }
 
-<span class="comment">// ERROR 2: Nom diferent</span>
-<span class="keyword">public</span> <span class="method">inicialitzar</span>() {
-    <span class="comment">// Això és un mètode normal</span>
-}
-
-<span class="comment">// ERROR 3: No usar 'this'</span>
-<span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom) {
-    nom = nom;  <span class="comment">// Assigna el paràmetre a si mateix!</span>
-}</div>
+<span class="comment">// Resultat:</span>
+<span class="class-name">Persona</span> p = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Anna"</span>, <span class="string">25</span>);
+<span class="comment">// Els atributs queden null i 0</span>
+<span class="comment">// Els valors "Anna" i 25 es perden!</span></div>
+                    <p><strong>Problema:</strong> Java no sap si "nom" és l'atribut o el paràmetre, així que usa el paràmetre.</p>
                 </div>
 
                 <div class="comparison-item comparison-good">
-                    <h4>Correcte</h4>
-                    <div class="code-block"><span class="comment">// CORRECTE 1: Sense tipus de retorn</span>
-<span class="keyword">public</span> <span class="method">Persona</span>() {
-    <span class="comment">// Aquest és un constructor vàlid</span>
+                    <h4>Amb THIS - CORRECTE!</h4>
+                    <div class="code-block"><span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom, <span class="keyword">int</span> edat) {
+    <span class="keyword">this</span>.nom = nom;    <span class="comment">// ✅ atribut = paràmetre</span>
+    <span class="keyword">this</span>.edat = edat;  <span class="comment">// ✅ atribut = paràmetre</span>
 }
 
-<span class="comment">// CORRECTE 2: Mateix nom que la classe</span>
-<span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> n) {
-    nom = n;
-}
+<span class="comment">// Resultat:</span>
+<span class="class-name">Persona</span> p = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Anna"</span>, <span class="string">25</span>);
+<span class="comment">// Els atributs són "Anna" i 25</span>
+<span class="comment">// Funciona perfectament!</span></div>
+                    <p><strong>Solució:</strong> <code>this.nom</code> indica clarament que és l'atribut de la classe.</p>
+                </div>
+            </div>
 
-<span class="comment">// CORRECTE 3: Usar 'this'</span>
-<span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom) {
-    <span class="keyword">this</span>.nom = nom;  <span class="comment">// Clar i sense ambigüitat</span>
+            <h3>THIS en Detall - Visualització</h3>
+
+            <div class="info-box">
+                <h4>Quan es crea un objecte:</h4>
+                <div class="code-block"><span class="class-name">Persona</span> anna = <span class="keyword">new</span> <span class="class-name">Persona</span>(<span class="string">"Anna"</span>, <span class="string">25</span>);
+
+<span class="comment">// Java fa això internament:</span>
+<span class="comment">// 1. Crea espai en memòria per a un objecte Persona</span>
+<span class="comment">// 2. "this" apunta a aquest nou objecte</span>
+<span class="comment">// 3. Executa el constructor:</span>
+<span class="comment">//    this.nom = "Anna"  → L'atribut nom d'aquest objecte = "Anna"</span>
+<span class="comment">//    this.edat = 25     → L'atribut edat d'aquest objecte = 25</span>
+<span class="comment">// 4. Retorna la referència a l'objecte creat</span>
+<span class="comment">// 5. "anna" ara fa referència a aquest objecte</span></div>
+            </div>
+
+            <h3>Exemple Complet amb THIS Explicat</h3>
+
+            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">CompteBancari</span> {
+    <span class="comment">// Atributs de la classe</span>
+    <span class="keyword">private</span> <span class="class-name">String</span> titular;
+    <span class="keyword">private double</span> saldo;
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> <span class="method">CompteBancari</span>(<span class="class-name">String</span> titular, <span class="keyword">double</span> saldo) {
+        <span class="comment">// this.titular fa referència a l'atribut de la classe</span>
+        <span class="comment">// titular (sense this) fa referència al paràmetre</span>
+        <span class="keyword">this</span>.titular = titular;
+        <span class="keyword">this</span>.saldo = saldo;
+    }
+    
+    <span class="comment">// També podem usar this en altres mètodes</span>
+    <span class="keyword">public void</span> <span class="method">mostrarInfo</span>() {
+        <span class="comment">// Aquí this és opcional (no hi ha ambigüitat)</span>
+        <span class="comment">// però és bona pràctica usar-lo per claredat</span>
+        System.out.println(<span class="string">"Titular: "</span> + <span class="keyword">this</span>.titular);
+        System.out.println(<span class="string">"Saldo: "</span> + <span class="keyword">this</span>.saldo);
+    }
 }</div>
-                </div>
-            </div>
 
-            <h3>Resum: Quan usar Constructors</h3>
+            <h3>Constructors amb Validació</h3>
 
-            <ul class="steps">
-                <li>
-                    <strong>Inicialització d'atributs</strong><br>
-                    Quan la teva classe té atributs que necessiten valors inicials
-                </li>
-                <li>
-                    <strong>Validació de dades</strong><br>
-                    Per comprovar que els valors inicials són correctes (per exemple, edat no pot ser negativa)
-                </li>
-                <li>
-                    <strong>Flexibilitat</strong><br>
-                    Crear múltiples constructors dona opcions a qui usa la teva classe
-                </li>
-                <li>
-                    <strong>Codi més net</strong><br>
-                    Inicialitzar en el constructor és més clar que fer-ho després amb setters
-                </li>
-            </ul>
+            <p>Els constructors són el lloc ideal per <strong>validar que les dades siguin correctes</strong> abans d'inicialitzar l'objecte.</p>
 
-            <div class="success-box" style="margin-top: 30px;">
-                <h3>Conceptes clau</h3>
-                <ul>
-                    <li><strong>Constructor:</strong> Mètode especial per inicialitzar objectes</li>
-                    <li><strong>Mateix nom:</strong> Ha de tenir exactament el mateix nom que la classe</li>
-                    <li><strong>Sense return:</strong> Mai té tipus de retorn, ni void</li>
-                    <li><strong>this:</strong> Fa referència a l'objecte actual</li>
-                    <li><strong>Sobrecàrrega:</strong> Pots tenir múltiples constructors amb diferents paràmetres</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- SECTION: Exemples -->
-        <div id="exemples" class="section">
-            <h2>Exemple Complet: Calculadora Modular</h2>
-
-            <h3>Objectiu</h3>
-            <p>Crear una calculadora amb operacions bàsiques organitzada amb packages.</p>
-
-            <h3>Estructura del projecte</h3>
-
-            <div class="project-structure">
-                <div class="folder">src/</div>
-                <div class="folder" style="margin-left: 20px;">utilitats/</div>
-                <div class="folder" style="margin-left: 40px;">calcul/</div>
-                <div class="file java" style="margin-left: 60px;" onclick="showDetail('detail-operacions')">
-                    Operacions.java
-                </div>
-                <div class="folder" style="margin-left: 20px;">programa/</div>
-                <div class="file java" style="margin-left: 40px;" onclick="showDetail('detail-calculadora')">
-                    Calculadora.java
-                </div>
-            </div>
-
-            <div id="detail-operacions" class="class-detail">
-                <h3>utilitats/calcul/Operacions.java</h3>
-                <div class="code-block"><span class="keyword">package</span> utilitats.calcul;
-
-<span class="keyword">public class</span> <span class="class-name">Operacions</span> {
+            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Estudiant</span> {
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;
+    <span class="keyword">private</span> <span class="keyword">int</span> edat;
+    <span class="keyword">private double</span> nota;
     
-    <span class="keyword">public int</span> <span class="method">sumar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
-        <span class="keyword">return</span> a + b;
-    }
-    
-    <span class="keyword">public int</span> <span class="method">restar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
-        <span class="keyword">return</span> a - b;
-    }
-    
-    <span class="keyword">public int</span> <span class="method">multiplicar</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
-        <span class="keyword">return</span> a * b;
-    }
-    
-    <span class="keyword">public double</span> <span class="method">dividir</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
-        <span class="keyword">if</span> (b == <span class="string">0</span>) {
-            System.out.println(<span class="string">"Error: divisió per zero!"</span>);
-            <span class="keyword">return</span> <span class="string">0</span>;
+    <span class="keyword">public</span> <span class="method">Estudiant</span>(<span class="class-name">String</span> nom, <span class="keyword">int</span> edat, <span class="keyword">double</span> nota) {
+        <span class="comment">// Validar nom</span>
+        <span class="keyword">if</span> (nom != <span class="keyword">null</span> && !nom.<span class="method">trim</span>().<span class="method">isEmpty</span>()) {
+            <span class="keyword">this</span>.nom = nom;
+        } <span class="keyword">else</span> {
+            <span class="keyword">this</span>.nom = <span class="string">"Desconegut"</span>;
+            System.out.println(<span class="string">"⚠️ Nom invàlid, s'usa 'Desconegut'"</span>);
         }
-        <span class="keyword">return</span> (<span class="keyword">double</span>) a / b;
+        
+        <span class="comment">// Validar edat (entre 16 i 99)</span>
+        <span class="keyword">if</span> (edat >= <span class="string">16</span> && edat <= <span class="string">99</span>) {
+            <span class="keyword">this</span>.edat = edat;
+        } <span class="keyword">else</span> {
+            <span class="keyword">this</span>.edat = <span class="string">18</span>;
+            System.out.println(<span class="string">"⚠️ Edat invàlida, s'usa 18"</span>);
+        }
+        
+        <span class="comment">// Validar nota (entre 0 i 10)</span>
+        <span class="keyword">if</span> (nota >= <span class="string">0.0</span> && nota <= <span class="string">10.0</span>) {
+            <span class="keyword">this</span>.nota = nota;
+        } <span class="keyword">else</span> {
+            <span class="keyword">this</span>.nota = <span class="string">0.0</span>;
+            System.out.println(<span class="string">"⚠️ Nota invàlida, s'usa 0.0"</span>);
+        }
     }
 }</div>
+
+            <div class="success-box">
+                <h4>Avantatges de validar en el constructor:</h4>
+                <ul>
+                    <li><strong>Seguretat:</strong> Els objectes sempre es creen amb dades vàlides</li>
+                    <li><strong>Consistència:</strong> No pots tenir objectes en estat invàlid</li>
+                    <li><strong>Detecció primerenca d'errors:</strong> Els problemes es detecten immediatament</li>
+                </ul>
             </div>
 
-            <div id="detail-calculadora" class="class-detail">
-                <h3>programa/Calculadora.java</h3>
-                <div class="code-block"><span class="keyword">package</span> programa;
+            <h3>Múltiples Constructors (Sobrecàrrega)</h3>
 
-<span class="keyword">import</span> java.util.Scanner;
-<span class="keyword">import</span> utilitats.calcul.Operacions;  <span class="comment">// ← IMPORTEM!</span>
+            <p>Pots tenir diversos constructors amb diferents paràmetres. Java decideix quin usar segons els arguments que li passis.</p>
 
-<span class="keyword">public class</span> <span class="class-name">Calculadora</span> {
-    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
-        <span class="class-name">Calculadora</span> programa = <span class="keyword">new</span> <span class="class-name">Calculadora</span>();
-        programa.<span class="method">inici</span>();
+            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Producte</span> {
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;
+    <span class="keyword">private double</span> preu;
+    
+    <span class="comment">// Constructor 1: sense paràmetres</span>
+    <span class="keyword">public</span> <span class="method">Producte</span>() {
+        <span class="keyword">this</span>.nom = <span class="string">"Producte genèric"</span>;
+        <span class="keyword">this</span>.preu = <span class="string">0.0</span>;
     }
     
-    <span class="keyword">public void</span> <span class="method">inici</span>() {
-        <span class="class-name">Scanner</span> sc = <span class="keyword">new</span> <span class="class-name">Scanner</span>(System.in);
-        
-        System.out.print(<span class="string">"Primer número: "</span>);
-        <span class="keyword">int</span> num1 = sc.nextInt();
-        
-        System.out.print(<span class="string">"Segon número: "</span>);
-        <span class="keyword">int</span> num2 = sc.nextInt();
-        
-        <span class="comment">// Inicialitzem la classe d'operacions</span>
-        <span class="class-name">Operacions</span> ops = <span class="keyword">new</span> <span class="class-name">Operacions</span>();
-        
-        <span class="comment">// Usem els seus mètodes</span>
-        System.out.println(<span class="string">"Suma: "</span> + ops.<span class="method">sumar</span>(num1, num2));
-        System.out.println(<span class="string">"Resta: "</span> + ops.<span class="method">restar</span>(num1, num2));
-        System.out.println(<span class="string">"Multiplicació: "</span> + ops.<span class="method">multiplicar</span>(num1, num2));
-        System.out.println(<span class="string">"Divisió: "</span> + ops.<span class="method">dividir</span>(num1, num2));
+    <span class="comment">// Constructor 2: només amb nom</span>
+    <span class="keyword">public</span> <span class="method">Producte</span>(<span class="class-name">String</span> nom) {
+        <span class="keyword">this</span>.nom = nom;
+        <span class="keyword">this</span>.preu = <span class="string">0.0</span>;
     }
+    
+    <span class="comment">// Constructor 3: nom i preu</span>
+    <span class="keyword">public</span> <span class="method">Producte</span>(<span class="class-name">String</span> nom, <span class="keyword">double</span> preu) {
+        <span class="keyword">this</span>.nom = nom;
+        <span class="keyword">this</span>.preu = preu;
+    }
+}
+
+<span class="comment">// Ús:</span>
+<span class="class-name">Producte</span> p1 = <span class="keyword">new</span> <span class="class-name">Producte</span>();                    <span class="comment">// Constructor 1</span>
+<span class="class-name">Producte</span> p2 = <span class="keyword">new</span> <span class="class-name">Producte</span>(<span class="string">"Portàtil"</span>);         <span class="comment">// Constructor 2</span>
+<span class="class-name">Producte</span> p3 = <span class="keyword">new</span> <span class="class-name">Producte</span>(<span class="string">"Ratolí"</span>, <span class="string">25.99</span>);  <span class="comment">// Constructor 3</span></div>
+
+            <h3>Errors Comuns amb Constructors</h3>
+
+            <div class="error-box">
+                <h4>Els 3 errors més freqüents:</h4>
+                <div class="code-block"><span class="comment">// ❌ ERROR 1: Posar tipus de retorn</span>
+<span class="keyword">public void</span> <span class="method">Persona</span>() {
+    <span class="comment">// Això NO és un constructor, és un mètode normal!</span>
+}
+
+<span class="comment">// ❌ ERROR 2: Nom diferent de la classe</span>
+<span class="keyword">public</span> <span class="method">inicialitzar</span>() {
+    <span class="comment">// Això és un mètode normal, no un constructor</span>
+}
+
+<span class="comment">// ❌ ERROR 3: No usar 'this'</span>
+<span class="keyword">public</span> <span class="method">Persona</span>(<span class="class-name">String</span> nom) {
+    nom = nom;  <span class="comment">// Assigna el paràmetre a si mateix! No funciona!</span>
 }</div>
             </div>
 
-            <div class="success-box" style="margin-top: 30px;">
-                <h3>Què hem aconseguit?</h3>
+            <div class="success-box">
+                <h4>Resum: Per què THIS és IMPRESCINDIBLE</h4>
                 <ul>
-                    <li>Separació clara entre lògica d'operacions i programa principal</li>
-                    <li>La classe Operacions es pot reutilitzar en altres projectes</li>
-                    <li>Codi més fàcil de mantenir i entendre</li>
-                    <li>Organització professional amb packages</li>
+                    <li><strong>Claredat:</strong> Deixa clar que estàs modificant l'atribut de la classe</li>
+                    <li><strong>Evita errors:</strong> Sense <code>this</code>, els atributs no s'inicialitzen</li>
+                    <li><strong>Bones pràctiques:</strong> És l'estàndard en Java professional</li>
+                    <li><strong>Mantenibilitat:</strong> El codi és més fàcil d'entendre i mantenir</li>
                 </ul>
+                <p style="margin-top: 15px;"><strong>Regla simple:</strong> En els constructors, SEMPRE usa <code>this.atribut = parametre</code></p>
             </div>
         </div>
 
-        <!-- SECTION: Exercicis -->
-        <div id="exercicis" class="section">
-            <h2>Exercicis per Practicar</h2>
+        <!-- SECTION 5: Packages -->
+        <div id="packages" class="section">
+            <h2>Packages: Organitzant el Codi</h2>
+            
+            <h3>Què és un Package?</h3>
+            
+            <div class="info-box">
+                <p>Un <strong>package</strong> és com una carpeta que agrupa classes relacionades.</p>
+                <p><strong>Funció:</strong> Organitzar grans projectes amb moltes classes i evitar conflictes de noms.</p>
+            </div>
+
+            <h3>Declarar un Package</h3>
 
             <div class="warning-box">
-                <strong>Temps estimat:</strong> 45-60 minuts<br>
-                <strong>Entrega:</strong> Codi font complet + captures de pantalla
+                <strong>Regla important:</strong> La declaració del package ha de ser la <strong>PRIMERA línia</strong> del fitxer
             </div>
 
-            <h3>Exercici 1: Gestió de Text</h3>
+            <div class="code-block"><span class="comment">// Fitxer: agenda/Contacte.java</span>
+
+<span class="keyword">package</span> agenda;  <span class="comment">← PRIMERA LÍNIA!</span>
+
+<span class="keyword">public class</span> <span class="class-name">Contacte</span> {
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;
+    <span class="comment">// ...</span>
+}</div>
+
+            <h3>Importar Classes</h3>
+
+            <div class="code-block"><span class="comment">// Importar una classe específica</span>
+<span class="keyword">import</span> agenda.Contacte;
+
+<span class="keyword">public class</span> <span class="class-name">Principal</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">Contacte</span> c = <span class="keyword">new</span> <span class="class-name">Contacte</span>(<span class="string">"Anna"</span>, <span class="string">"666777888"</span>);
+    }
+}</div>
+        </div>
+
+        <!-- SECTION 6: Exemples -->
+        <div id="exemples" class="section">
+            <h2>Exemple Complet: Sistema de Biblioteca</h2>
+            
+            <h3>Classe Llibre amb Constructor i Validació</h3>
+
+            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">Llibre</span> {
+    <span class="comment">// Atributs PRIVATS</span>
+    <span class="keyword">private</span> <span class="class-name">String</span> titol;
+    <span class="keyword">private</span> <span class="class-name">String</span> autor;
+    <span class="keyword">private</span> <span class="keyword">int</span> anyPublicacio;
+    <span class="keyword">private</span> <span class="keyword">boolean</span> disponible;
+    
+    <span class="comment">// Constructor amb validació</span>
+    <span class="keyword">public</span> <span class="method">Llibre</span>(<span class="class-name">String</span> titol, <span class="class-name">String</span> autor, <span class="keyword">int</span> anyPublicacio) {
+        <span class="keyword">if</span> (titol != <span class="keyword">null</span> && !titol.<span class="method">trim</span>().<span class="method">isEmpty</span>()) {
+            <span class="keyword">this</span>.titol = titol;
+        } <span class="keyword">else</span> {
+            <span class="keyword">this</span>.titol = <span class="string">"Sense títol"</span>;
+        }
+        
+        <span class="keyword">if</span> (autor != <span class="keyword">null</span> && !autor.<span class="method">trim</span>().<span class="method">isEmpty</span>()) {
+            <span class="keyword">this</span>.autor = autor;
+        } <span class="keyword">else</span> {
+            <span class="keyword">this</span>.autor = <span class="string">"Desconegut"</span>;
+        }
+        
+        <span class="keyword">if</span> (anyPublicacio > <span class="string">1000</span> && anyPublicacio <= <span class="string">2026</span>) {
+            <span class="keyword">this</span>.anyPublicacio = anyPublicacio;
+        } <span class="keyword">else</span> {
+            <span class="keyword">this</span>.anyPublicacio = <span class="string">2026</span>;
+        }
+        
+        <span class="keyword">this</span>.disponible = <span class="keyword">true</span>;
+    }
+    
+    <span class="comment">// Getters</span>
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getTitol</span>() {
+        <span class="keyword">return</span> <span class="keyword">this</span>.titol;
+    }
+    
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getAutor</span>() {
+        <span class="keyword">return</span> <span class="keyword">this</span>.autor;
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="method">isDisponible</span>() {
+        <span class="keyword">return</span> <span class="keyword">this</span>.disponible;
+    }
+    
+    <span class="comment">// Mètodes de negoci</span>
+    <span class="keyword">public void</span> <span class="method">prestar</span>() {
+        <span class="keyword">if</span> (<span class="keyword">this</span>.disponible) {
+            <span class="keyword">this</span>.disponible = <span class="keyword">false</span>;
+            System.out.println(<span class="string">"Llibre prestat: "</span> + <span class="keyword">this</span>.titol);
+        } <span class="keyword">else</span> {
+            System.out.println(<span class="string">"El llibre no està disponible"</span>);
+        }
+    }
+    
+    <span class="keyword">public void</span> <span class="method">retornar</span>() {
+        <span class="keyword">if</span> (!<span class="keyword">this</span>.disponible) {
+            <span class="keyword">this</span>.disponible = <span class="keyword">true</span>;
+            System.out.println(<span class="string">"Llibre retornat: "</span> + <span class="keyword">this</span>.titol);
+        }
+    }
+    
+    <span class="keyword">public void</span> <span class="method">mostrarInfo</span>() {
+        System.out.println(<span class="string">"Títol: "</span> + <span class="keyword">this</span>.titol);
+        System.out.println(<span class="string">"Autor: "</span> + <span class="keyword">this</span>.autor);
+        System.out.println(<span class="string">"Any: "</span> + <span class="keyword">this</span>.anyPublicacio);
+        System.out.println(<span class="string">"Disponible: "</span> + (<span class="keyword">this</span>.disponible ? <span class="string">"Sí"</span> : <span class="string">"No"</span>));
+    }
+}</div>
+
+            <h3>Programa de Prova</h3>
+
+            <div class="code-block"><span class="keyword">public class</span> <span class="class-name">TestBiblioteca</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="comment">// Crear llibres amb el constructor</span>
+        <span class="class-name">Llibre</span> llibre1 = <span class="keyword">new</span> <span class="class-name">Llibre</span>(<span class="string">"1984"</span>, <span class="string">"George Orwell"</span>, <span class="string">1949</span>);
+        <span class="class-name">Llibre</span> llibre2 = <span class="keyword">new</span> <span class="class-name">Llibre</span>(<span class="string">"El Quixot"</span>, <span class="string">"Cervantes"</span>, <span class="string">1605</span>);
+        
+        llibre1.<span class="method">mostrarInfo</span>();
+        llibre1.<span class="method">prestar</span>();
+        llibre1.<span class="method">retornar</span>();
+    }
+}</div>
+        </div>
+
+        <!-- SECTION 7: Exercicis ACTUALITZATS -->
+        <div id="exercicis" class="section">
+            <h2>Exercicis Pràctics (ACTUALITZATS)</h2>
+            
+            <div class="warning-box">
+                <strong>Informació Important:</strong>
+                <ul>
+                    <li><strong>Exercicis obligatoris:</strong> 2 (més realistes)</li>
+                    <li><strong>Temps estimat:</strong> 120 minuts</li>
+                    <li><strong>IMPORTANT:</strong> Tots els exercicis REQUEREIXEN constructors amb validació</li>
+                </ul>
+            </div>
+
+            <h3>Exercici 1: Gestió d'Agenda de Contactes (Obligatori)</h3>
+
             <div class="info-box">
-                <strong>Objectiu:</strong> Crear una aplicació modular per analitzar cadenes de text.
+                <h4>Descripció</h4>
+                <p>Crear un sistema complet de gestió de contactes amb la classe <code>Contacte</code> i la classe <code>Agenda</code>.</p>
                 
-                <p style="margin-top: 15px;"><strong>Estructura requerida:</strong></p>
+                <h4>Requisits Tècnics</h4>
                 <ul>
-                    <li><code>utilitats.text.AnalitzadorText</code> - Mètodes d'anàlisi</li>
-                    <li><code>programa.GestorText</code> - Programa principal</li>
-                </ul>
-
-                <p style="margin-top: 15px;"><strong>Mètodes a implementar en AnalitzadorText:</strong></p>
-                <ul>
-                    <li><code>comptarVocals(String text)</code> → retorna int</li>
-                    <li><code>comptarConsonants(String text)</code> → retorna int</li>
-                    <li><code>invertir(String text)</code> → retorna String</li>
-                    <li><code>esPalindrom(String text)</code> → retorna boolean</li>
+                    <li><strong>Package:</strong> <code>agenda</code></li>
+                    <li><strong>Classe Contacte:</strong> amb constructor obligatori que validi les dades</li>
+                    <li><strong>Classe Agenda:</strong> gestiona un array de contactes (màxim 50)</li>
+                    <li><strong>Classe Principal:</strong> amb menú interactiu</li>
                 </ul>
             </div>
 
-            <h3>Exercici 2: Conversió d'Unitats</h3>
+            <h3>Classe Contacte - Especificació Completa</h3>
+
+            <div class="code-block"><span class="keyword">package</span> agenda;
+
+<span class="keyword">public class</span> <span class="class-name">Contacte</span> {
+    <span class="comment">// Atributs PRIVATS</span>
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;
+    <span class="keyword">private</span> <span class="class-name">String</span> telefon;
+    <span class="keyword">private</span> <span class="class-name">String</span> email;
+    
+    <span class="comment">// CONSTRUCTOR amb validació OBLIGATÒRIA</span>
+    <span class="keyword">public</span> <span class="method">Contacte</span>(<span class="class-name">String</span> nom, <span class="class-name">String</span> telefon, <span class="class-name">String</span> email) {
+        <span class="comment">// TODO: Validar nom (no buit)</span>
+        <span class="comment">// TODO: Validar telefon (mínim 9 dígits)</span>
+        <span class="comment">// TODO: Validar email (conté @)</span>
+        <span class="comment">// Usar this.atribut = valor per assignar</span>
+    }
+    
+    <span class="comment">// GETTERS (obligatoris)</span>
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getNom</span>() {
+        <span class="comment">// TODO: retornar this.nom</span>
+    }
+    
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getTelefon</span>() {
+        <span class="comment">// TODO: retornar this.telefon</span>
+    }
+    
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getEmail</span>() {
+        <span class="comment">// TODO: retornar this.email</span>
+    }
+    
+    <span class="comment">// SETTERS amb validació (obligatoris)</span>
+    <span class="keyword">public void</span> <span class="method">setTelefon</span>(<span class="class-name">String</span> telefon) {
+        <span class="comment">// TODO: validar i assignar amb this</span>
+    }
+    
+    <span class="keyword">public void</span> <span class="method">setEmail</span>(<span class="class-name">String</span> email) {
+        <span class="comment">// TODO: validar i assignar amb this</span>
+    }
+    
+    <span class="comment">// Mètode per mostrar informació</span>
+    <span class="keyword">public void</span> <span class="method">mostrarInfo</span>() {
+        <span class="comment">// TODO: mostrar nom, telefon i email</span>
+    }
+}</div>
+
+            <h3>Classe Agenda - Especificació</h3>
+
+            <div class="code-block"><span class="keyword">package</span> agenda;
+
+<span class="keyword">public class</span> <span class="class-name">Agenda</span> {
+    <span class="keyword">private</span> <span class="class-name">Contacte</span>[] contactes;
+    <span class="keyword">private</span> <span class="keyword">int</span> numContactes;
+    <span class="keyword">private static final int</span> MAX_CONTACTES = <span class="string">50</span>;
+    
+    <span class="comment">// CONSTRUCTOR que inicialitza l'array</span>
+    <span class="keyword">public</span> <span class="method">Agenda</span>() {
+        <span class="comment">// TODO: inicialitzar this.contactes</span>
+        <span class="comment">// TODO: inicialitzar this.numContactes a 0</span>
+    }
+    
+    <span class="comment">// Afegir contacte (retorna true si s'ha afegit)</span>
+    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="method">afegirContacte</span>(<span class="class-name">Contacte</span> contacte) {
+        <span class="comment">// TODO: comprovar si hi ha espai</span>
+        <span class="comment">// TODO: afegir a l'array i incrementar contador</span>
+    }
+    
+    <span class="comment">// Buscar contacte per nom (retorna el contacte o null)</span>
+    <span class="keyword">public</span> <span class="class-name">Contacte</span> <span class="method">buscarContacte</span>(<span class="class-name">String</span> nom) {
+        <span class="comment">// TODO: recórrer array i buscar per nom</span>
+    }
+    
+    <span class="comment">// Eliminar contacte per nom (retorna true si s'ha eliminat)</span>
+    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="method">eliminarContacte</span>(<span class="class-name">String</span> nom) {
+        <span class="comment">// TODO: buscar i eliminar (moure elements)</span>
+    }
+    
+    <span class="comment">// Llistar tots els contactes</span>
+    <span class="keyword">public void</span> <span class="method">llistarContactes</span>() {
+        <span class="comment">// TODO: recórrer i mostrar tots</span>
+    }
+    
+    <span class="comment">// Obtenir número total de contactes</span>
+    <span class="keyword">public</span> <span class="keyword">int</span> <span class="method">getNumContactes</span>() {
+        <span class="comment">// TODO: retornar this.numContactes</span>
+    }
+}</div>
+
+            <div class="success-box">
+                <h4>Criteris d'avaluació Exercici 1 (10 punts)</h4>
+                <ul>
+                    <li><strong>Constructor Contacte amb validació (3p):</strong> Valida nom, telèfon (9 dígits) i email (@)</li>
+                    <li><strong>Getters/Setters correctes (2p):</strong> Usen <code>this</code> correctament</li>
+                    <li><strong>Constructor Agenda (1p):</strong> Inicialitza array i comptador amb <code>this</code></li>
+                    <li><strong>Mètodes Agenda funcionals (3p):</strong> Afegir, buscar, eliminar, llistar</li>
+                    <li><strong>Programa principal amb menú (1p):</strong> Interfície clara i funcional</li>
+                </ul>
+            </div>
+
+            <h3>Exercici 2: Sistema de Gestió de Productes (Obligatori)</h3>
+
             <div class="info-box">
-                <strong>Objectiu:</strong> Crear un conversor d'unitats (temperatura, distància, pes).
+                <h4>Descripció</h4>
+                <p>Crear un sistema de gestió d'inventari amb la classe <code>Producte</code> i la classe <code>Inventari</code>.</p>
                 
-                <p style="margin-top: 15px;"><strong>Estructura requerida:</strong></p>
+                <h4>Requisits Tècnics</h4>
                 <ul>
-                    <li><code>utilitats.conversions.Temperatura</code></li>
-                    <li><code>utilitats.conversions.Distancia</code></li>
-                    <li><code>utilitats.conversions.Pes</code></li>
-                    <li><code>programa.Conversor</code> - Amb menú d'opcions</li>
-                </ul>
-
-                <p style="margin-top: 15px;"><strong>Exemple de mètodes:</strong></p>
-                <ul>
-                    <li><code>celsiusAFahrenheit(double celsius)</code></li>
-                    <li><code>kilometresAMilles(double km)</code></li>
-                    <li><code>kilosALliures(double kg)</code></li>
+                    <li><strong>Package:</strong> <code>botiga</code></li>
+                    <li><strong>Classe Producte:</strong> amb constructor que inicialitza codi, nom, preu i stock</li>
+                    <li><strong>Classe Inventari:</strong> gestiona array de productes</li>
+                    <li><strong>Validació estricta:</strong> preu > 0, stock >= 0</li>
                 </ul>
             </div>
 
-            <h3>Exercici 3: Gestió de Contactes</h3>
-            <div class="info-box">
-                <strong>Objectiu:</strong> Crear una agenda de contactes amb operacions bàsiques.
-                
-                <p style="margin-top: 15px;"><strong>Estructura requerida:</strong></p>
-                <ul>
-                    <li><code>utilitats.contactes.GestorContactes</code></li>
-                    <li><code>programa.Agenda</code></li>
-                </ul>
+            <h3>Classe Producte - Especificació Completa</h3>
 
-                <p style="margin-top: 15px;"><strong>Funcionalitat:</strong></p>
-                <ul>
-                    <li>Afegir contacte (nom, telèfon)</li>
-                    <li>Buscar contacte per nom</li>
-                    <li>Eliminar contacte</li>
-                    <li>Mostrar tots els contactes</li>
-                </ul>
+            <div class="code-block"><span class="keyword">package</span> botiga;
 
-                <p style="margin-top: 15px;"><em>Pista: Usa arrays paral·lels per emmagatzemar noms i telèfons</em></p>
+<span class="keyword">public class</span> <span class="class-name">Producte</span> {
+    <span class="comment">// Atributs PRIVATS</span>
+    <span class="keyword">private</span> <span class="class-name">String</span> codi;
+    <span class="keyword">private</span> <span class="class-name">String</span> nom;
+    <span class="keyword">private double</span> preu;
+    <span class="keyword">private</span> <span class="keyword">int</span> stock;
+    
+    <span class="comment">// CONSTRUCTOR amb validació OBLIGATÒRIA</span>
+    <span class="keyword">public</span> <span class="method">Producte</span>(<span class="class-name">String</span> codi, <span class="class-name">String</span> nom, <span class="keyword">double</span> preu, <span class="keyword">int</span> stock) {
+        <span class="comment">// TODO: Assignar codi amb this</span>
+        <span class="comment">// TODO: Assignar nom amb this</span>
+        <span class="comment">// TODO: Validar preu > 0, sinó posar 0.01</span>
+        <span class="comment">// TODO: Validar stock >= 0, sinó posar 0</span>
+    }
+    
+    <span class="comment">// GETTERS (tots obligatoris)</span>
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getCodi</span>() {
+        <span class="comment">// TODO: retornar this.codi</span>
+    }
+    
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getNom</span>() {
+        <span class="comment">// TODO: retornar this.nom</span>
+    }
+    
+    <span class="keyword">public double</span> <span class="method">getPreu</span>() {
+        <span class="comment">// TODO: retornar this.preu</span>
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">int</span> <span class="method">getStock</span>() {
+        <span class="comment">// TODO: retornar this.stock</span>
+    }
+    
+    <span class="comment">// SETTERS amb validació</span>
+    <span class="keyword">public void</span> <span class="method">setPreu</span>(<span class="keyword">double</span> preu) {
+        <span class="comment">// TODO: validar preu > 0 i assignar amb this</span>
+    }
+    
+    <span class="comment">// Afegir stock (retorna true si s'ha afegit)</span>
+    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="method">afegirStock</span>(<span class="keyword">int</span> quantitat) {
+        <span class="comment">// TODO: si quantitat > 0, afegir a this.stock</span>
+    }
+    
+    <span class="comment">// Retirar stock (retorna true si hi ha prou stock)</span>
+    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="method">retirarStock</span>(<span class="keyword">int</span> quantitat) {
+        <span class="comment">// TODO: comprovar si this.stock >= quantitat</span>
+        <span class="comment">// TODO: si sí, restar de this.stock i retornar true</span>
+        <span class="comment">// TODO: si no, retornar false</span>
+    }
+    
+    <span class="comment">// Calcular valor total (preu × stock)</span>
+    <span class="keyword">public double</span> <span class="method">calcularValor</span>() {
+        <span class="comment">// TODO: retornar this.preu * this.stock</span>
+    }
+    
+    <span class="comment">// Té stock baix? (menys de 5 unitats)</span>
+    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="method">teStockBaix</span>() {
+        <span class="comment">// TODO: retornar true si this.stock < 5</span>
+    }
+    
+    <span class="keyword">public void</span> <span class="method">mostrarInfo</span>() {
+        <span class="comment">// TODO: mostrar tota la informació del producte</span>
+    }
+}</div>
+
+            <h3>Classe Inventari - Especificació</h3>
+
+            <div class="code-block"><span class="keyword">package</span> botiga;
+
+<span class="keyword">public class</span> <span class="class-name">Inventari</span> {
+    <span class="keyword">private</span> <span class="class-name">Producte</span>[] productes;
+    <span class="keyword">private</span> <span class="keyword">int</span> numProductes;
+    <span class="keyword">private static final int</span> MAX_PRODUCTES = <span class="string">100</span>;
+    
+    <span class="comment">// CONSTRUCTOR</span>
+    <span class="keyword">public</span> <span class="method">Inventari</span>() {
+        <span class="comment">// TODO: inicialitzar this.productes</span>
+        <span class="comment">// TODO: inicialitzar this.numProductes</span>
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">boolean</span> <span class="method">afegirProducte</span>(<span class="class-name">Producte</span> producte) {
+        <span class="comment">// TODO: afegir si hi ha espai</span>
+    }
+    
+    <span class="keyword">public</span> <span class="class-name">Producte</span> <span class="method">buscarProducte</span>(<span class="class-name">String</span> codi) {
+        <span class="comment">// TODO: buscar per codi</span>
+    }
+    
+    <span class="keyword">public void</span> <span class="method">llistarProductesStockBaix</span>() {
+        <span class="comment">// TODO: mostrar productes amb stock < 5</span>
+    }
+    
+    <span class="keyword">public double</span> <span class="method">calcularValorTotal</span>() {
+        <span class="comment">// TODO: sumar valor de tots els productes</span>
+    }
+    
+    <span class="keyword">public void</span> <span class="method">llistarTotsElsProductes</span>() {
+        <span class="comment">// TODO: mostrar tots</span>
+    }
+}</div>
+
+            <div class="success-box">
+                <h4>Criteris d'avaluació Exercici 2 (10 punts)</h4>
+                <ul>
+                    <li><strong>Constructor Producte amb validació (3p):</strong> Valida preu > 0 i stock >= 0 amb <code>this</code></li>
+                    <li><strong>Getters correctes (1p):</strong> Tots retornen amb <code>this</code></li>
+                    <li><strong>Mètodes afegirStock/retirarStock (2p):</strong> Funcionen correctament</li>
+                    <li><strong>Constructor Inventari (1p):</strong> Inicialitza correctament amb <code>this</code></li>
+                    <li><strong>Mètodes Inventari (2p):</strong> Buscar, llistar stock baix, calcular valor</li>
+                    <li><strong>Programa de proves (1p):</strong> Demostra tota la funcionalitat</li>
+                </ul>
             </div>
 
-            <h3>Checklist abans d'entregar</h3>
+            <h3>Checklist Abans d'Entregar</h3>
+
             <ul class="steps">
-                <li>El projecte està organitzat amb packages correctament</li>
-                <li>Les classes estan en els fitxers i packages correctes</li>
-                <li>Totes les classes tenen la declaració <code>package</code> a la primera línia</li>
-                <li>Els imports són correctes i necessaris</li>
-                <li>El codi compila sense errors</li>
-                <li>El programa funciona correctament</li>
-                <li>El codi està comentat adequadament</li>
+                <li>
+                    <strong>Constructors OBLIGATORIS</strong><br>
+                    Totes les classes tenen constructor que inicialitza TOTS els atributs<br>
+                    SEMPRE usen <code>this.atribut = parametre</code>
+                </li>
+                <li>
+                    <strong>Validació en Constructors</strong><br>
+                    Els constructors validen les dades abans d'assignar-les<br>
+                    Si les dades són invàlides, posen valors per defecte
+                </li>
+                <li>
+                    <strong>Encapsulació Completa</strong><br>
+                    TOTS els atributs són <code>private</code><br>
+                    Hi ha getters/setters on calgui
+                </li>
+                <li>
+                    <strong>Packages Correctes</strong><br>
+                    Declaració <code>package</code> a la primera línia<br>
+                    Estructura de carpetes correcta
+                </li>
+                <li>
+                    <strong>Compilació i Proves</strong><br>
+                    El codi compila sense errors<br>
+                    Programa principal que prova TOTA la funcionalitat
+                </li>
             </ul>
 
-            <div class="success-box" style="margin-top: 30px;">
-                <h3>Criteris d'avaluació</h3>
+            <div class="warning-box">
+                <h4>Format d'Entrega</h4>
+                <p><strong>Estructura requerida:</strong></p>
+                <div class="code-block">NomCognom_POO_Exercicis/
+├── Exercici1_Agenda/
+│   └── agenda/
+│       ├── Contacte.java
+│       ├── Agenda.java
+│       └── Principal.java
+├── Exercici2_Inventari/
+│   └── botiga/
+│       ├── Producte.java
+│       ├── Inventari.java
+│       └── Principal.java
+└── Captures/
+    ├── exercici1_execucio.png
+    └── exercici2_execucio.png</div>
+                <p style="margin-top: 15px;"><strong>Format:</strong> NomCognom_POO_Exercicis.zip</p>
+            </div>
+
+            <div class="error-box">
+                <h4>IMPORTANT: Errors que descompten nota</h4>
                 <ul>
-                    <li><strong>Modularitat (40%):</strong> Bones divisions de classes i packages</li>
-                    <li><strong>Funcionalitat (30%):</strong> El programa funciona correctament</li>
-                    <li><strong>Codi net (20%):</strong> Noms descriptius, comentaris adequats</li>
-                    <li><strong>Organització (10%):</strong> Estructura de fitxers correcta</li>
+                    <li><strong>-2 punts:</strong> No usar constructors</li>
+                    <li><strong>-2 punts:</strong> No usar <code>this</code> en els constructors</li>
+                    <li><strong>-1 punt:</strong> Atributs públics (no encapsulats)</li>
+                    <li><strong>-1 punt:</strong> No validar dades en el constructor</li>
+                    <li><strong>-1 punt:</strong> Falten getters/setters necessaris</li>
                 </ul>
             </div>
+
+            <div class="success-box" style="text-align: center; margin-top: 40px;">
+                <h3>Èxit amb els exercicis!</h3>
+                <p><strong>Recorda:</strong> Els constructors amb <code>this</code> són FONAMENTALS en POO</p>
+                <p>Sense constructors adequats, els objectes no s'inicialitzen correctament!</p>
+            </div>
         </div>
-    </div>
 
-    <script>
-        // Show section
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Update nav buttons
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Scroll to top
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        // Show class detail
-        function showClassDetail(className) {
-            // Hide all details
-            const details = document.querySelectorAll('.class-detail');
-            details.forEach(detail => detail.classList.remove('active'));
-            
-            // Show selected detail
-            const detail = document.getElementById('detail-' + className);
-            if (detail) {
-                detail.classList.add('active');
-                detail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
-            }
-        }
-
-        // Show detail (for cards)
-        function showDetail(detailId) {
-            const detail = document.getElementById(detailId);
-            if (detail) {
-                if (detail.classList.contains('active')) {
-                    detail.classList.remove('active');
-                } else {
-                    // Hide all other details
-                    const allDetails = document.querySelectorAll('.class-detail');
-                    allDetails.forEach(d => d.classList.remove('active'));
-                    
-                    // Show this one
-                    detail.classList.add('active');
-                    detail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+        <!-- JavaScript para navegación -->
+        <script>
+            function showSection(sectionId) {
+                // Ocultar todas las secciones
+                const sections = document.querySelectorAll('.section');
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // Mostrar la sección seleccionada
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
                 }
+                
+                // Actualizar botones de navegación
+                const buttons = document.querySelectorAll('.nav-btn');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                
+                // Activar el botón correspondiente
+                event.target.classList.add('active');
+                
+                // Scroll al inicio
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-        }
-
-        // Toggle code visibility
-        function toggleCode(codeId) {
-            const code = document.getElementById(codeId);
-            if (code) {
-                code.classList.toggle('hidden');
-                event.target.textContent = code.classList.contains('hidden') ? 
-                    'Veure Codi' : 'Amagar Codi';
-            }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Material de Classes i Modularitat carregat!');
-        });
-    </script>
+        </script>
+    </div>
 </body>
 </html>
